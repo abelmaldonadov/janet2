@@ -18,14 +18,15 @@ public class UserBean implements Serializable {
     private String name;
     private String store;
     private String role;
+    private String email;
     private String state;
     
     private String userIns;
     private String dateIns;
     private String hostIns;
-    private String userAct;
-    private String dateAct;
-    private String hostAct;
+    private String userUpd;
+    private String dateUpd;
+    private String hostUpd;
     
     public UserBean() {
     }
@@ -35,14 +36,23 @@ public class UserBean implements Serializable {
         this.name = String.valueOf(row.get("use_name"));
         this.store = String.valueOf(row.get("use_store"));
         this.role = String.valueOf(row.get("use_role"));
+        this.role = String.valueOf(row.get("use_email"));
         this.state = String.valueOf(row.get("use_state"));
         
-        this.userIns = String.valueOf(row.get("audi_userIns"));
-        this.dateIns = String.valueOf(row.get("audi_dateIns"));
-        this.hostIns = String.valueOf(row.get("audi_hostIns"));
-        this.userAct = String.valueOf(row.get("audi_userAct"));
-        this.dateAct = String.valueOf(row.get("audi_dateAct"));
-        this.hostAct = String.valueOf(row.get("audi_hostAct"));
+        this.userIns = String.valueOf(row.get("audi_user_ins"));
+        this.dateIns = String.valueOf(row.get("audi_date_ins"));
+        this.hostIns = String.valueOf(row.get("audi_host_ins"));
+        this.userUpd = String.valueOf(row.get("audi_user_upd"));
+        this.dateUpd = String.valueOf(row.get("audi_date_upd"));
+        this.hostUpd = String.valueOf(row.get("audi_host_upd"));
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getUser() {
@@ -109,30 +119,29 @@ public class UserBean implements Serializable {
         this.hostIns = hostIns;
     }
 
-    public String getUserAct() {
-        return userAct;
+    public String getUserUpd() {
+        return userUpd;
     }
 
-    public void setUserAct(String userAct) {
-        this.userAct = userAct;
+    public void setUserUpd(String userUpd) {
+        this.userUpd = userUpd;
     }
 
-    public String getDateAct() {
-        return dateAct;
+    public String getDateUpd() {
+        return dateUpd;
     }
 
-    public void setDateAct(String dateAct) {
-        this.dateAct = dateAct;
+    public void setDateUpd(String dateUpd) {
+        this.dateUpd = dateUpd;
     }
 
-    public String getHostAct() {
-        return hostAct;
+    public String getHostUpd() {
+        return hostUpd;
     }
 
-    public void setHostAct(String hostAct) {
-        this.hostAct = hostAct;
+    public void setHostUpd(String hostUpd) {
+        this.hostUpd = hostUpd;
     }
-    
     
     
 }

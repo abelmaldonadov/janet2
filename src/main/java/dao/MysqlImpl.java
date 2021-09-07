@@ -32,7 +32,7 @@ public class MysqlImpl implements Driver{
     
     private Connection getConnection() throws SQLException {
         try {
-            Class.forName("com.mysql.jdbc.Driver").newInstance();
+            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException  ex) {
             Logger.getLogger(MysqlImpl.class.getName()).log(Level.SEVERE, null, ex);
         }

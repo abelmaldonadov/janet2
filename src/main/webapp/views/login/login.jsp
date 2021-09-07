@@ -9,33 +9,32 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        
         <title>${title}</title>
+        <%@include file="../templates/styles.jsp" %>
         
-        <!--Mandarina Css-->
-        <link rel='stylesheet' href='https://cdn.jsdelivr.net/gh/mandarinacss/mandarina@master/mandarina.ini.css'>
-        <link rel='stylesheet' href='https://cdn.jsdelivr.net/gh/mandarinacss/mandarina@master/mandarina.min.css'>
     </head>
     <body>
-        <main class="row flex-center pt-9">
-        <div class="col sm-6 md-5 lg-4 xl-3">
-            <form class="form white" action="#" method="POST">
-                <h3 class="center mb-3">Login</h3>
-                <input type="mail" id="mail" placeholder="Ingresa tu correo electrónico">
-                <input type="pass" id="pass" placeholder="Ingresa tu contraseña">
-                <a href="#" class="link text-orange ml-1">Recuperar contraseña</a>
-                <div class="flex-right">
-                    <button class="btn l-orange">Enviar</button>
+        
+        <main class="container" id="app">
+            
+            <div class="row flex-center pt-9">
+                <div class="col sm-6 md-5 lg-4 xl-3">
+                    <h3 class="center mb-3">Login</h3>
+                    <input type="text" placeholder="Ingresa tu usuario" v-model="user">
+                    <input type="password" placeholder="Ingresa tu contraseña" v-model="password" @keypress.enter="login">
+                    <a href="#" class="link text-orange ml-1">Recuperar contraseña</a>
+                    <div class="flex-right">
+                        <button class="btn l-orange" @click="login">Ingresar</button>
+                    </div>
                 </div>
-            </form>
-        </div>
-    </main>
+            </div>
+            
+        </main>
         
         
-        
-        
-        <!--Mandarina Scripts-->
-        <script src='https://cdn.jsdelivr.net/gh/mandarinacss/mandarina@master/mandarina.min.js'></script>
+        <%@include file="../templates/vue.jsp" %>
+        <script src="${context}/views/login/login.js"></script>
+        <%@include file="../templates/scripts.jsp" %>
         
     </body>
 </html>

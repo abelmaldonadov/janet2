@@ -4,26 +4,42 @@
     Author     : abelm
 --%>
 
+<%@page import="beans.AreaBean"%>
+<%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>${title}</title>
-        
-        <!--Mandarina Css-->
-        <link rel='stylesheet' href='https://cdn.jsdelivr.net/gh/mandarinacss/mandarina@master/mandarina.ini.css'>
-        <link rel='stylesheet' href='https://cdn.jsdelivr.net/gh/mandarinacss/mandarina@master/mandarina.min.css'>
-        
+        <%@include file="../templates/styles.jsp" %>
     </head>
     <body>
         
+        <%@include file="../templates/navbar.jsp" %>
         
+        <main class="container" id="app">
+            <div class="row">
+                
+                <%
+                    ArrayList arrAreas = (ArrayList) request.getAttribute("arrAreas");
+                    for (int i = 0; i < arrAreas.size(); i++) {
+                        AreaBean area = (AreaBean) arrAreas.get(i);
+                %>
+                    <div class="col md-4">
+                        <!-- CAPTION -->
+                        <a class="image" href="${context}<%= area.getRoute() %>" data-bg="${context}<%= area.getImage() %>" data-height="200px">
+                            <div class="caption">
+                                <h4><%= area.getName()%></h4>
+                            </div>
+                        </a>
+                    </div>
+                <% } %>
+                
+            </div>
+        </main>
         
-        
-        
-        <!--Mandarina Scripts-->
-        <script src='https://cdn.jsdelivr.net/gh/mandarinacss/mandarina@master/mandarina.min.js'></script>
+        <%@include file="../templates/scripts.jsp" %>
         
     </body>
 </html>

@@ -5,8 +5,12 @@
  */
 package servlets.login;
 
+import beans.UserBean;
+import dao.Driver;
+import factory.DaoFactory;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -21,26 +25,6 @@ import javax.servlet.http.HttpServletResponse;
 public class Login extends HttpServlet {
 
     /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        
-        request.setAttribute("title", "Login");
-        
-        ServletContext sc = request.getServletContext();
-        RequestDispatcher rd = sc.getRequestDispatcher("/views/login/login.jsp");
-        rd.forward(request, response);
-    }
-
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
      * Handles the HTTP <code>GET</code> method.
      *
      * @param request servlet request
@@ -49,9 +33,15 @@ public class Login extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        
+        request.setAttribute("title", "Login");
+        request.setAttribute("context", request.getContextPath());
+        
+        ServletContext sc = request.getServletContext();
+        RequestDispatcher rd = sc.getRequestDispatcher("/views/login/login.jsp");
+        rd.forward(request, response);
     }
 
     /**
@@ -63,19 +53,23 @@ public class Login extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        response.setContentType("application/json");
+        
+        try {
+            // Validar datos de ususario
+            ArrayList arrParams = new ArrayList();
+            arrParams.add(request.getParameter("user"));
+            arrParams.add(request.getParameter("password"));
+            Driver dao = DaoFactory.createDao();
+            dao.exec("sp_login", arrParams);
+            
+            // Iniciar sesión
+            request.getSession().setAttribute("token", "true");
+            
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            response.sendError(404);
+        }
     }
-
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
-
 }
