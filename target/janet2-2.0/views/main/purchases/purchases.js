@@ -14,7 +14,7 @@ var app = new Vue({
         purchase: {},
         
         arrProviders: [],
-        provider: {}
+        arrProducts: []
     },
     methods: {
         purchaseGet(item){
@@ -32,6 +32,7 @@ var app = new Vue({
             .then(json => {
                 this.arrPurchases = json.arrPurchases
                 this.arrProviders = json.arrProviders
+                this.arrProducts = json.arrProducts
             })
             .catch(() => Mandarina.error({}))
             .finally(() => Mandarina.spinnerHide())

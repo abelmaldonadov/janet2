@@ -35,7 +35,7 @@ public class Inventory extends HttpServlet {
         request.setAttribute("context", request.getContextPath());
         
         ServletContext sc = request.getServletContext();
-        RequestDispatcher rd = sc.getRequestDispatcher("/views/main/inventary/inventary.jsp");
+        RequestDispatcher rd = sc.getRequestDispatcher("/views/main/inventory/inventory.jsp");
         rd.forward(request, response);
     }
 

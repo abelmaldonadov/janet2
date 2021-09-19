@@ -30,6 +30,7 @@ public class PurchasesApi extends HttpServlet {
     
     PurchaseBean purchase;
     ProviderBean provider;
+    ProviderBean product;
     UserBean user;
 
     @Override
@@ -80,9 +81,18 @@ public class PurchasesApi extends HttpServlet {
                 arrProviders.add(provider);
             }
             
+            // Cargar datos de todos los productos
+            ArrayList tableProducts = dao.getData("sp_products_getall");
+            ArrayList arrProducts = new ArrayList();
+            for (Object row : tableProducts) {
+                product = new ProviderBean((LinkedHashMap) row);
+                arrProducts.add(product);
+            }
+            
             //
             resolve.put("arrProviders", arrProviders);
             resolve.put("arrPurchases", arrPurchases);
+            resolve.put("arrProducts", arrProducts);
             
             // Procesar respuesta JSON
             try (PrintWriter out = response.getWriter()) {
@@ -101,18 +111,17 @@ public class PurchasesApi extends HttpServlet {
         purchase = new Gson().fromJson(request.getParameter("purchase"), PurchaseBean.class);
         
         try {
-            // Actualizar datos de la compra
+            // Insertar datos de la compra
             Driver dao = DaoFactory.createDao();
             ArrayList data = new ArrayList();
-            data.add(purchase.getId());
             data.add(purchase.getAmount());
-            data.add(purchase.getTotalCost());
+            data.add(purchase.getProductId());
             data.add(purchase.getProviderId());
             data.add(purchase.getArrivalDate());
             data.add(purchase.getNotes());
             data.add(purchase.getState());
-            data.add("AMALDONADO");
-            data.add("127.0.0.1");
+            data.add(request.getSession().getAttribute("user"));
+            data.add(request.getSession().getAttribute("host"));
             dao.exec("sp_purchases_insert", data);
 
             // Procesar estado http
@@ -134,13 +143,13 @@ public class PurchasesApi extends HttpServlet {
             ArrayList data = new ArrayList();
             data.add(purchase.getId());
             data.add(purchase.getAmount());
-            data.add(purchase.getTotalCost());
+            data.add(purchase.getProductId());
             data.add(purchase.getProviderId());
             data.add(purchase.getArrivalDate());
             data.add(purchase.getNotes());
             data.add(purchase.getState());
-            data.add("AMALDONADO");
-            data.add("127.0.0.1");
+            data.add(request.getSession().getAttribute("user"));
+            data.add(request.getSession().getAttribute("host"));
             dao.exec("sp_purchases_update", data);
 
             // Procesar estado http
@@ -149,11 +158,6 @@ public class PurchasesApi extends HttpServlet {
             System.out.println(ex.getMessage());
             response.sendError(404);
         }
-    }
-
-    @Override
-    protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        
     }
     
 }

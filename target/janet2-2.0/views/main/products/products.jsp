@@ -19,11 +19,9 @@
         <main class="container" id="app">
             
             <div class="radius shadow white p-2 mb-3 text-right">
-                <button class="btn btn-lg ml-1">&#128202;</button> <!--Reportes-->
+                <button class="btn btn-lg ml-1 modal-open">&#128202;</button> <!--Reportes-->
                 <button class="btn btn-lg ml-1 modal-open" data-target="#searchModal">&#128269;</button> <!--Buscar-->
-                <button class="btn btn-lg ml-1 modal-open" data-target="#blacklistModal">&#127988;</button> <!--Más valorados-->
                 <button class="btn btn-lg ml-1 modal-open" data-target="#allModal">&#128194;</button> <!--Todos-->
-                <button class="btn btn-lg ml-1">&#128681;</button> <!--Marcados-->
                 <button class="btn btn-lg ml-1 modal-open" data-target="#newModal" @click="clearForm">&#128195;</button> <!--Nuevo-->
             </div>
             
@@ -34,36 +32,43 @@
                     <thead>
                         <tr>
                             <th>#</th>
+                            <th>Categoría</th>
                             <th>Nombre</th>
-                            <th>Plataforma</th>
-                            <th>Tratos</th>
-                            <th>Calificación</th>
+                            <th>Marca</th>
+                            <th>Modelo</th>
+                            <th>Etiqueta</th>
                             <th>Estado</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="item in arrProviders10Comp">
+                        <tr v-for="item in arrProducts10Comp">
                             <th>{{ item.id }}</th>
+                            <td>{{ getAux("category", item.category).value }}</td>
                             <td>{{ item.name }}</td>
-                            <td>{{ item.plataform }}</td>
-                            <td>{{ item.deals }}</td>
-                            <td>{{ getAux("score", item.score).value }}</td>
+                            <td>{{ item.brand }}</td>
+                            <td>{{ item.model }}</td>
+                            <td>{{ item.tag }}</td>
                             <td>{{ getAux("states", item.state).value }}</td>
                             <td class="w-10px" 
-                                onclick="Mandarina.modalShow('#updateModal')" 
-                                @click="providerGet(item)">&#128221;</td> <!--Editar-->
+                                onclick="Mandarina.modalShow('#costsModal')" 
+                                @click="productGet(item)">&#128176;</td> <!--Costos-->
+                            <td class="w-10px" 
+                                onclick="Mandarina.modalShow('#editModal')" 
+                                @click="productGet(item)">&#128221;</td> <!--Editar-->
                         </tr>
                     </tbody>
                 </table>
             </div>
             
             
+            <!--Products-->
+            <%@include file="forms/search.jsp" %>
+            <%@include file="forms/all.jsp" %>
+            <%@include file="forms/new.jsp" %>
+            <%@include file="forms/edit.jsp" %>
             
-            
-            
-            
-            
-            
+            <!--Costs-->
+            <%@include file="forms/costs.jsp" %>
             
             
         </main>

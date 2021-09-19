@@ -6,7 +6,6 @@
 package servlets.main.providers;
 
 import beans.ProviderBean;
-import beans.PurchaseBean;
 import com.google.gson.Gson;
 import dao.Driver;
 import factory.DaoFactory;
@@ -88,7 +87,6 @@ public class ProvidersApi extends HttpServlet {
             // Actualizar datos de la compra
             Driver dao = DaoFactory.createDao();
             ArrayList data = new ArrayList();
-            data.add(provider.getId());
             data.add(provider.getName());
             data.add(provider.getPlataform());
             data.add(provider.getChannel());
@@ -100,8 +98,8 @@ public class ProvidersApi extends HttpServlet {
             data.add(provider.getBlacklist());
             data.add(provider.getNotes());
             data.add(provider.getState());
-            data.add("AMALDONADO");
-            data.add("127.0.0.1");
+            data.add(request.getSession().getAttribute("user"));
+            data.add(request.getSession().getAttribute("host"));
             dao.exec("sp_providers_insert", data);
 
             // Procesar estado http
@@ -133,8 +131,8 @@ public class ProvidersApi extends HttpServlet {
             data.add(provider.getBlacklist());
             data.add(provider.getNotes());
             data.add(provider.getState());
-            data.add("AMALDONADO");
-            data.add("127.0.0.1");
+            data.add(request.getSession().getAttribute("user"));
+            data.add(request.getSession().getAttribute("host"));
             dao.exec("sp_providers_update", data);
 
             // Procesar estado http
@@ -143,11 +141,6 @@ public class ProvidersApi extends HttpServlet {
             System.out.println(ex.getMessage());
             response.sendError(404);
         }
-    }
-    
-    @Override
-    protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        
     }
 
 }

@@ -16,7 +16,8 @@ public class PurchaseBean implements Serializable {
     
     private String id;
     private String amount;
-    private String totalCost;
+    private String productId;
+    private String productName;
     private String providerId;
     private String providerName;
     private String arrivalDate;
@@ -36,11 +37,12 @@ public class PurchaseBean implements Serializable {
     public PurchaseBean(LinkedHashMap row) {
         this.id = String.valueOf(row.get("pur_id"));
         this.amount = String.valueOf(row.get("pur_amount"));
-        this.totalCost = String.valueOf(row.get("pur_total_cost"));
+        this.productId = String.valueOf(row.get("pur_product_id"));
+        this.productName = String.valueOf(row.get("pur_product_name"));
         this.providerId = String.valueOf(row.get("pur_provider_id"));
-        this.providerName = String.valueOf(row.get("pro_name"));
+        this.providerName = String.valueOf(row.get("pur_provider_name"));
         this.arrivalDate = String.valueOf(row.get("pur_arrival_date"));
-        this.notes = String.valueOf(row.get("pur_note"));
+        this.notes = String.valueOf(row.get("pur_notes"));
         this.state = String.valueOf(row.get("pur_state"));
         
         this.userIns = String.valueOf(row.get("audi_user_ins"));
@@ -49,6 +51,14 @@ public class PurchaseBean implements Serializable {
         this.userUpd = String.valueOf(row.get("audi_user_upd"));
         this.dateUpd = String.valueOf(row.get("audi_date_upd"));
         this.hostUpd = String.valueOf(row.get("audi_host_upd"));
+    }
+
+    public String getProductName() {
+        return productName;
+    }
+
+    public void setProductName(String productName) {
+        this.productName = productName;
     }
 
     public String getProviderName() {
@@ -75,12 +85,12 @@ public class PurchaseBean implements Serializable {
         this.amount = amount;
     }
 
-    public String getTotalCost() {
-        return totalCost;
+    public String getProductId() {
+        return productId;
     }
 
-    public void setTotalCost(String totalCost) {
-        this.totalCost = totalCost;
+    public void setProductId(String productId) {
+        this.productId = productId;
     }
 
     public String getProviderId() {

@@ -45,8 +45,10 @@ public class Home extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         
-        request.setAttribute("title", "Purchases");
+        request.setAttribute("title", "Home");
         request.setAttribute("context", request.getContextPath());
+        request.setAttribute("user", request.getSession().getAttribute("user"));
+        request.setAttribute("host", request.getSession().getAttribute("host"));
         
         ServletContext sc = request.getServletContext();
         RequestDispatcher rd = sc.getRequestDispatcher("/views/home/home.jsp");

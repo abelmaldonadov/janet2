@@ -5,7 +5,6 @@
  */
 package servlets.login;
 
-import beans.UserBean;
 import dao.Driver;
 import factory.DaoFactory;
 import java.io.IOException;
@@ -66,6 +65,8 @@ public class Login extends HttpServlet {
             
             // Iniciar sesión
             request.getSession().setAttribute("token", "true");
+            request.getSession().setAttribute("user", request.getParameter("user"));
+            request.getSession().setAttribute("host", request.getRemoteAddr());
             
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());

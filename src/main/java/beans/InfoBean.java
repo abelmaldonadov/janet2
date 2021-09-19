@@ -23,6 +23,9 @@ public class InfoBean implements Serializable {
     private ArrayList typeOfDocuments = new ArrayList();
     private ArrayList bool = new ArrayList();
     private ArrayList score = new ArrayList();
+    private ArrayList category = new ArrayList();
+    private ArrayList tags = new ArrayList();
+    private ArrayList channel = new ArrayList();
     
     public InfoBean() {
     }
@@ -36,7 +39,34 @@ public class InfoBean implements Serializable {
             else if (id.equals("2")) this.typeOfDocuments.add(new AuxBean(newRow));
             else if (id.equals("3")) this.bool.add(new AuxBean(newRow));
             else if (id.equals("4")) this.score.add(new AuxBean(newRow));
+            else if (id.equals("5")) this.category.add(new AuxBean(newRow));
+            else if (id.equals("6")) this.tags.add(new AuxBean(newRow));
+            else if (id.equals("7")) this.channel.add(new AuxBean(newRow));
         }
+    }
+
+    public ArrayList getCategory() {
+        return category;
+    }
+
+    public void setCategory(ArrayList category) {
+        this.category = category;
+    }
+
+    public ArrayList getTags() {
+        return tags;
+    }
+
+    public void setTags(ArrayList tags) {
+        this.tags = tags;
+    }
+
+    public ArrayList getChannel() {
+        return channel;
+    }
+
+    public void setChannel(ArrayList channel) {
+        this.channel = channel;
     }
 
     public ArrayList getBool() {

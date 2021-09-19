@@ -58,7 +58,7 @@ public class MysqlImpl implements Driver{
         while (result.next()) {
             LinkedHashMap<String, String> row = new LinkedHashMap();
             for (int i = 0; i < numCols; i++) {
-                row.put(meta.getColumnName(i+1), result.getString(i+1));
+                row.put(meta.getColumnLabel(i+1), result.getString(i+1));
             }
             table.add(row);
         }
@@ -81,7 +81,7 @@ public class MysqlImpl implements Driver{
         while (result.next()) {
             LinkedHashMap<String, String> row = new LinkedHashMap();
             for (int i = 0; i < numCols; i++)
-                row.put(meta.getColumnName(i+1), result.getString(i+1));
+                row.put(meta.getColumnLabel(i+1), result.getString(i+1));
             table.add(row);
         }
         result.close();

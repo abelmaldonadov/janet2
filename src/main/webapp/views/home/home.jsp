@@ -19,6 +19,9 @@
         <%@include file="../templates/navbar.jsp" %>
         
         <main class="container" id="app">
+            <div class="row mb-4">
+                <h4 class="center">Bienvenido <span class="text-notify">${user}</span> &#127774;</h4>
+            </div>
             <div class="row">
                 
                 <%
