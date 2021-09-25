@@ -8,7 +8,7 @@
 <div class="modal" id="allModal">
     <div class="content white">
         <div class="modal-header">
-            <h4>Todos los Clientes</h4>
+            <h4>Todos los Vendedores</h4>
         </div>
         <div class="modal-body">
 
@@ -16,27 +16,23 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th>Canal</th>
+                        <th>Id</th>
                         <th>Nombre</th>
-                        <th>Teléfono</th>
-                        <th>Correo</th>
-                        <th>Dirección</th>
+                        <th>Tratos</th>
                         <th>Calificación</th>
                         <th>Estado</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="item in arrCustomers10Comp">
-                        <th>{{ getAux("channel", item.channel).value }}</th>
+                    <tr v-for="item in arrVendors10Comp">
+                        <th>{{ item.id }}</th>
                         <td>{{ item.name }}</td>
-                        <td>{{ item.phone }}</td>
-                        <td>{{ item.email }}</td>
-                        <td>{{ item.addr }}</td>
+                        <td>{{ item.deals }}</td>
                         <td>{{ getAux("score", item.score).value }}</td>
                         <td>{{ getAux("states", item.state).value }}</td>
                         <td class="w-10px" 
                             onclick="Mandarina.modalShow('#editModal')" 
-                            @click="customerGet(item)">&#128221;</td>
+                            @click="vendorGet(item)">&#128221;</td>
                     </tr>
                 </tbody>
             </table>

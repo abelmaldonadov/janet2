@@ -25,7 +25,7 @@ import utils.Request;
  *
  * @author abelm
  */
-public class productsApi extends HttpServlet {
+public class ProductsApi extends HttpServlet {
     
     ProductBean product;
     CostBean cost;

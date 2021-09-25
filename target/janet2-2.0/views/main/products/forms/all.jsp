@@ -32,7 +32,7 @@
                         <td>{{ item.name }}</td>
                         <td>{{ item.brand }}</td>
                         <td>{{ item.model }}</td>
-                        <td>{{ item.tag }}</td>
+                        <td>{{ getAux("tags", item.tag).value }}</td>
                         <td>{{ getAux("states", item.state).value }}</td>
                         <td class="w-10px" 
                             onclick="Mandarina.modalShow('#costsModal')" 

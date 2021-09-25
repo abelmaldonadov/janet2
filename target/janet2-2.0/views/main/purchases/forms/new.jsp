@@ -13,13 +13,15 @@
         <div class="modal-body">
 
             <div class="row">
-                <div class="col md-6">
+                <div class="col">
                     <label class="ml-1">Producto</label>
                     <select v-model="purchase.productId">
-                        <option v-for="item in arrProducts" :value="item.id" v-if="item.state=='A'">{{ item.name }}</option>
+                        <option v-for="item in arrProducts" :value="item.id" v-if="item.state=='A'">{{ item.name }} : {{ item.unitary }}</option>
                     </select>
                 </div>
-                <div class="col md-6">
+            </div>
+            <div class="row">
+                <div class="col">
                     <label class="ml-1">Proveedor</label>
                     <select v-model="purchase.providerId">
                         <option v-for="item in arrProviders" :value="item.id" v-if="item.state=='A' && item.blacklist==0">{{ item.name }}</option>

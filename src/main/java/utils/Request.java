@@ -42,7 +42,8 @@ public class Request {
         }
         
         // Separar los parametors en key y content
-        String[] arrJson = json.split("[=]");
+        String[] arrJson = json.split("[=]", 2);
+        
         
         return arrJson;
     }

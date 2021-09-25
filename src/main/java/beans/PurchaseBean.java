@@ -17,12 +17,14 @@ public class PurchaseBean implements Serializable {
     private String id;
     private String amount;
     private String productId;
-    private String productName;
     private String providerId;
-    private String providerName;
     private String arrivalDate;
     private String notes;
     private String state;
+    
+    private String providerName;
+    private String productName;
+    private String unitary;
     
     private String userIns;
     private String dateIns;
@@ -38,12 +40,14 @@ public class PurchaseBean implements Serializable {
         this.id = String.valueOf(row.get("pur_id"));
         this.amount = String.valueOf(row.get("pur_amount"));
         this.productId = String.valueOf(row.get("pur_product_id"));
-        this.productName = String.valueOf(row.get("pur_product_name"));
         this.providerId = String.valueOf(row.get("pur_provider_id"));
-        this.providerName = String.valueOf(row.get("pur_provider_name"));
         this.arrivalDate = String.valueOf(row.get("pur_arrival_date"));
         this.notes = String.valueOf(row.get("pur_notes"));
         this.state = String.valueOf(row.get("pur_state"));
+        
+        this.productName = String.valueOf(row.get("pur_product_name"));
+        this.providerName = String.valueOf(row.get("pur_provider_name"));
+        this.unitary = String.valueOf(row.get("pur_unitary"));
         
         this.userIns = String.valueOf(row.get("audi_user_ins"));
         this.dateIns = String.valueOf(row.get("audi_date_ins"));
@@ -51,6 +55,14 @@ public class PurchaseBean implements Serializable {
         this.userUpd = String.valueOf(row.get("audi_user_upd"));
         this.dateUpd = String.valueOf(row.get("audi_date_upd"));
         this.hostUpd = String.valueOf(row.get("audi_host_upd"));
+    }
+
+    public String getUnitary() {
+        return unitary;
+    }
+
+    public void setUnitary(String unitary) {
+        this.unitary = unitary;
     }
 
     public String getProductName() {

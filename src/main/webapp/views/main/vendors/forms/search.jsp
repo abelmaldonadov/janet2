@@ -8,7 +8,7 @@
 <div class="modal" id="searchModal">
     <div class="content white">
         <div class="modal-header">
-            <h4>Buscar Cliente</h4>
+            <h4>Buscar Vendedor</h4>
         </div>
         <div class="modal-body">
 
@@ -33,7 +33,7 @@
         </div>
         <div class="modal-footer">
             <button class="btn l-red modal-close">Cancelar</button>
-            <button class="btn l-notify" @click="customerSearch">Buscar</button>
+            <button class="btn l-notify" @click="vendorSearch">Buscar</button>
         </div>
     </div>
 </div>

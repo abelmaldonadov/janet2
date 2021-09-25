@@ -65,8 +65,8 @@
         <servlet-class>servlets.main.providers.ProvidersApi</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>productsApi</servlet-name>
-        <servlet-class>servlets.main.products.productsApi</servlet-class>
+        <servlet-name>ProductsApi</servlet-name>
+        <servlet-class>servlets.main.products.ProductsApi</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>CostsApi</servlet-name>
@@ -81,12 +81,12 @@
         <servlet-class>servlets.main.sales.SalesApi</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>Customers</servlet-name>
-        <servlet-class>servlets.main.customers.Customers</servlet-class>
+        <servlet-name>Vendors</servlet-name>
+        <servlet-class>servlets.main.vendors.Vendors</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>CustomersApi</servlet-name>
-        <servlet-class>servlets.main.customers.CustomersApi</servlet-class>
+        <servlet-name>VendorsApi</servlet-name>
+        <servlet-class>servlets.main.vendors.VendorsApi</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>login</servlet-name>
@@ -137,7 +137,7 @@
         <url-pattern>/main/providersApi</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>productsApi</servlet-name>
+        <servlet-name>ProductsApi</servlet-name>
         <url-pattern>/main/productsApi</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
@@ -153,12 +153,12 @@
         <url-pattern>/main/salesApi</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>Customers</servlet-name>
-        <url-pattern>/main/customers</url-pattern>
+        <servlet-name>Vendors</servlet-name>
+        <url-pattern>/main/vendors</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>CustomersApi</servlet-name>
-        <url-pattern>/main/customersApi</url-pattern>
+        <servlet-name>VendorsApi</servlet-name>
+        <url-pattern>/main/vendorsApi</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

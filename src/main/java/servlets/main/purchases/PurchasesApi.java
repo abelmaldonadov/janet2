@@ -5,6 +5,7 @@
  */
 package servlets.main.purchases;
 
+import beans.ProductBean;
 import beans.ProviderBean;
 import beans.PurchaseBean;
 import beans.UserBean;
@@ -30,7 +31,7 @@ public class PurchasesApi extends HttpServlet {
     
     PurchaseBean purchase;
     ProviderBean provider;
-    ProviderBean product;
+    ProductBean product;
     UserBean user;
 
     @Override
@@ -85,7 +86,7 @@ public class PurchasesApi extends HttpServlet {
             ArrayList tableProducts = dao.getData("sp_products_getall");
             ArrayList arrProducts = new ArrayList();
             for (Object row : tableProducts) {
-                product = new ProviderBean((LinkedHashMap) row);
+                product = new ProductBean((LinkedHashMap) row);
                 arrProducts.add(product);
             }
             

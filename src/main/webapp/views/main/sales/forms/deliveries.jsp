@@ -15,7 +15,9 @@
             <!-- ALERT -->
             <div class="alert l-yellow" v-for="item in arrDeliveriesComp">
                 <b class="text-13">{{ item.productName }}</b>
-                <p>Cliente:  {{ item.customerName }}</p>
+                <p>Vendedor:  {{ item.vendorName }}</p>
+                <p>Cliente:  {{ item.customer }}</p>
+                <p>Lugar de entrega:  {{ item.deliveryPlace }}</p>
                 <p>Fecha de entrega: {{ item.deliveryDate }}</p>
             </div>
 

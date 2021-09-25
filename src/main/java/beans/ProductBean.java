@@ -25,6 +25,9 @@ public class ProductBean implements Serializable {
     private String notes;
     private String state;
     
+    private String unitary;
+    private String listPrice;
+    
     private String userIns;
     private String dateIns;
     private String hostIns;
@@ -47,12 +50,23 @@ public class ProductBean implements Serializable {
         this.notes = String.valueOf(row.get("pro_notes"));
         this.state = String.valueOf(row.get("pro_state"));
         
+        this.unitary = String.valueOf(row.get("pro_unitary"));
+        this.listPrice = String.valueOf(row.get("pro_list_price"));
+        
         this.userIns = String.valueOf(row.get("audi_user_ins"));
         this.dateIns = String.valueOf(row.get("audi_date_ins"));
         this.hostIns = String.valueOf(row.get("audi_host_ins"));
         this.userUpd = String.valueOf(row.get("audi_user_upd"));
         this.dateUpd = String.valueOf(row.get("audi_date_upd"));
         this.hostUpd = String.valueOf(row.get("audi_host_upd"));
+    }
+
+    public String getListPrice() {
+        return listPrice;
+    }
+
+    public void setListPrice(String listPrice) {
+        this.listPrice = listPrice;
     }
 
     public String getId() {

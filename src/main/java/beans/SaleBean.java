@@ -16,16 +16,21 @@ public class SaleBean implements Serializable {
     
     private String id;
     private String inventoryId;
-    private String productName;
     private String unitPrice;
     private String amount;
     private String totalPrice;
     private String deliveryDate;
     private String payment;
-    private String customerId;
-    private String customerName;
+    private String vendorId;
     private String notes;
     private String state;
+    
+    private String productName;
+    private String vendorName;
+    private String deliveryTime;
+    private String deliveryPlace;
+    private String deliveryMethod;
+    private String customer;
     
     private String userIns;
     private String dateIns;
@@ -40,16 +45,21 @@ public class SaleBean implements Serializable {
     public SaleBean(LinkedHashMap row) {
         this.id = String.valueOf(row.get("sal_id"));
         this.inventoryId = String.valueOf(row.get("sal_inventory_id"));
-        this.productName = String.valueOf(row.get("sal_product_name"));
         this.unitPrice = String.valueOf(row.get("sal_unit_price"));
         this.amount = String.valueOf(row.get("sal_amount"));
         this.totalPrice = String.valueOf(row.get("sal_total_price"));
         this.deliveryDate = String.valueOf(row.get("sal_delivery_date"));
         this.payment = String.valueOf(row.get("sal_payment"));
-        this.customerId = String.valueOf(row.get("sal_customer_id"));
-        this.customerName = String.valueOf(row.get("sal_customer_name"));
+        this.vendorId = String.valueOf(row.get("sal_vendor_id"));
         this.notes = String.valueOf(row.get("sal_notes"));
         this.state = String.valueOf(row.get("sal_state"));
+        
+        this.productName = String.valueOf(row.get("sal_product_name"));
+        this.vendorName = String.valueOf(row.get("sal_vendor_name"));
+        this.deliveryTime = String.valueOf(row.get("sal_delivery_time"));
+        this.deliveryPlace = String.valueOf(row.get("sal_delivery_place"));
+        this.deliveryMethod = String.valueOf(row.get("sal_delivery_method"));
+        this.customer = String.valueOf(row.get("sal_customer"));
         
         this.userIns = String.valueOf(row.get("audi_user_ins"));
         this.dateIns = String.valueOf(row.get("audi_date_ins"));
@@ -59,12 +69,52 @@ public class SaleBean implements Serializable {
         this.hostUpd = String.valueOf(row.get("audi_host_upd"));
     }
 
-    public String getCustomerName() {
-        return customerName;
+    public String getVendorName() {
+        return vendorName;
     }
 
-    public void setCustomerName(String customerName) {
-        this.customerName = customerName;
+    public void setVendorName(String vendorName) {
+        this.vendorName = vendorName;
+    }
+
+    public String getVendorId() {
+        return vendorId;
+    }
+
+    public void setVendorId(String vendorId) {
+        this.vendorId = vendorId;
+    }
+
+    public String getDeliveryTime() {
+        return deliveryTime;
+    }
+
+    public void setDeliveryTime(String deliveryTime) {
+        this.deliveryTime = deliveryTime;
+    }
+
+    public String getDeliveryPlace() {
+        return deliveryPlace;
+    }
+
+    public void setDeliveryPlace(String deliveryPlace) {
+        this.deliveryPlace = deliveryPlace;
+    }
+
+    public String getDeliveryMethod() {
+        return deliveryMethod;
+    }
+
+    public void setDeliveryMethod(String deliveryMethod) {
+        this.deliveryMethod = deliveryMethod;
+    }
+
+    public String getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(String customer) {
+        this.customer = customer;
     }
 
     public String getProductName() {
@@ -73,14 +123,6 @@ public class SaleBean implements Serializable {
 
     public void setProductName(String productName) {
         this.productName = productName;
-    }
-
-    public String getCustomerId() {
-        return customerId;
-    }
-
-    public void setCustomerId(String customerId) {
-        this.customerId = customerId;
     }
 
     public String getDeliveryDate() {

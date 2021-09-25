@@ -1,6 +1,7 @@
 D:\OneDrive\Documentos\NetBeansProjects\janet2\src\main\java\filters\sessionFilter.java
 D:\OneDrive\Documentos\NetBeansProjects\janet2\src\main\java\beans\AreaBean.java
 D:\OneDrive\Documentos\NetBeansProjects\janet2\src\main\java\factory\DaoFactory.java
+D:\OneDrive\Documentos\NetBeansProjects\janet2\src\main\java\servlets\main\vendors\VendorsApi.java
 D:\OneDrive\Documentos\NetBeansProjects\janet2\src\main\java\beans\SaleBean.java
 D:\OneDrive\Documentos\NetBeansProjects\janet2\src\main\java\servlets\main\providers\Providers.java
 D:\OneDrive\Documentos\NetBeansProjects\janet2\src\main\java\beans\InfoBean.java
@@ -10,7 +11,9 @@ D:\OneDrive\Documentos\NetBeansProjects\janet2\src\main\java\servlets\main\sales
 D:\OneDrive\Documentos\NetBeansProjects\janet2\src\main\java\servlets\main\providers\ProvidersApi.java
 D:\OneDrive\Documentos\NetBeansProjects\janet2\src\main\java\beans\AuxBean.java
 D:\OneDrive\Documentos\NetBeansProjects\janet2\src\main\java\beans\UserBean.java
+D:\OneDrive\Documentos\NetBeansProjects\janet2\src\main\java\servlets\main\vendors\Vendors.java
 D:\OneDrive\Documentos\NetBeansProjects\janet2\src\main\java\servlets\main\purchases\PurchasesApi.java
+D:\OneDrive\Documentos\NetBeansProjects\janet2\src\main\java\beans\VendorBean.java
 D:\OneDrive\Documentos\NetBeansProjects\janet2\src\main\java\servlets\main\products\Products.java
 D:\OneDrive\Documentos\NetBeansProjects\janet2\src\main\java\servlets\main\purchases\Purchases.java
 D:\OneDrive\Documentos\NetBeansProjects\janet2\src\main\java\utils\Converter.java
@@ -23,9 +26,7 @@ D:\OneDrive\Documentos\NetBeansProjects\janet2\src\main\java\servlets\login\Logo
 D:\OneDrive\Documentos\NetBeansProjects\janet2\src\main\java\utils\Request.java
 D:\OneDrive\Documentos\NetBeansProjects\janet2\src\main\java\servlets\main\stores\Stores.java
 D:\OneDrive\Documentos\NetBeansProjects\janet2\src\main\java\servlets\main\products\productsApi.java
-D:\OneDrive\Documentos\NetBeansProjects\janet2\src\main\java\servlets\main\customers\Customers.java
 D:\OneDrive\Documentos\NetBeansProjects\janet2\src\main\java\servlets\main\inventory\InventoryApi.java
-D:\OneDrive\Documentos\NetBeansProjects\janet2\src\main\java\beans\CustomerBean.java
 D:\OneDrive\Documentos\NetBeansProjects\janet2\src\main\java\servlets\main\sales\Sales.java
 D:\OneDrive\Documentos\NetBeansProjects\janet2\src\main\java\beans\InventoryBean.java
 D:\OneDrive\Documentos\NetBeansProjects\janet2\src\main\java\servlets\main\inventory\Inventory.java

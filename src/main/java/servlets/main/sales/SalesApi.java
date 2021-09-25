@@ -5,7 +5,7 @@
  */
 package servlets.main.sales;
 
-import beans.CustomerBean;
+import beans.VendorBean;
 import beans.InventoryBean;
 import beans.SaleBean;
 import com.google.gson.Gson;
@@ -30,7 +30,7 @@ public class SalesApi extends HttpServlet {
     
     SaleBean sale;
     InventoryBean inventory;
-    CustomerBean customer;
+    VendorBean vendor;
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -80,18 +80,18 @@ public class SalesApi extends HttpServlet {
                 arrInventories.add(inventory);
             }
             
-            // Cargar datos de todos los clientes
-            ArrayList tableCustomers = dao.getData("sp_customers_getall");
-            ArrayList arrCustomers = new ArrayList();
-            for (Object row : tableCustomers) {
-                customer = new CustomerBean((LinkedHashMap) row);
-                arrCustomers.add(customer);
+            // Cargar datos de todos los vendedores
+            ArrayList tableVendors = dao.getData("sp_vendors_getall");
+            ArrayList arrVendors = new ArrayList();
+            for (Object row : tableVendors) {
+                vendor = new VendorBean((LinkedHashMap) row);
+                arrVendors.add(vendor);
             }
             
             //
             resolve.put("arrSales", arrSales);
             resolve.put("arrInventories", arrInventories);
-            resolve.put("arrCustomers", arrCustomers);
+            resolve.put("arrVendors", arrVendors);
             
             // Procesar respuesta JSON
             try (PrintWriter out = response.getWriter()) {
@@ -118,8 +118,12 @@ public class SalesApi extends HttpServlet {
             data.add(sale.getAmount());
             data.add(sale.getTotalPrice());
             data.add(sale.getDeliveryDate());
+            data.add(sale.getDeliveryTime());
+            data.add(sale.getDeliveryPlace());
+            data.add(sale.getDeliveryMethod());
+            data.add(sale.getCustomer());
             data.add(sale.getPayment());
-            data.add(sale.getCustomerId());
+            data.add(sale.getVendorId());
             data.add(sale.getNotes());
             data.add(sale.getState());
             data.add(request.getSession().getAttribute("user"));
@@ -144,9 +148,17 @@ public class SalesApi extends HttpServlet {
             Driver dao = DaoFactory.createDao();
             ArrayList data = new ArrayList();
             data.add(sale.getId());
+            data.add(sale.getInventoryId());
+            data.add(sale.getUnitPrice());
+            data.add(sale.getAmount());
+            data.add(sale.getTotalPrice());
             data.add(sale.getDeliveryDate());
+            data.add(sale.getDeliveryTime());
+            data.add(sale.getDeliveryPlace());
+            data.add(sale.getDeliveryMethod());
+            data.add(sale.getCustomer());
             data.add(sale.getPayment());
-            data.add(sale.getCustomerId());
+            data.add(sale.getVendorId());
             data.add(sale.getNotes());
             data.add(sale.getState());
             data.add(request.getSession().getAttribute("user"));

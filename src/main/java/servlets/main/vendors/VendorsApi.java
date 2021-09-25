@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package servlets.main.customers;
+package servlets.main.vendors;
 
-import beans.CustomerBean;
+import beans.VendorBean;
 import com.google.gson.Gson;
 import dao.Driver;
 import factory.DaoFactory;
@@ -24,9 +24,9 @@ import utils.Request;
  *
  * @author abelm
  */
-public class CustomersApi extends HttpServlet {
+public class VendorsApi extends HttpServlet {
     
-    CustomerBean customer;
+    VendorBean vendor;
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -35,17 +35,17 @@ public class CustomersApi extends HttpServlet {
             response.setContentType("application/json");
             
             try {
-                // Cargar datos del cliente
+                // Cargar datos del vendedor
                 Driver dao = DaoFactory.createDao();
                 ArrayList data = new ArrayList();
                 data.add(request.getParameter("id"));
-                ArrayList table = dao.getData("sp_customers_get", data);
-                customer = new CustomerBean((LinkedHashMap) table.get(0));
+                ArrayList table = dao.getData("sp_vendors_get", data);
+                vendor = new VendorBean((LinkedHashMap) table.get(0));
 
                 // Procesar respuesta JSON
                 try (PrintWriter out = response.getWriter()) {
                     response.setStatus(200);
-                    out.print(new Gson().toJson(customer));
+                    out.print(new Gson().toJson(vendor));
                 }
             } catch (SQLException ex) {
                 System.out.println(ex.getMessage());
@@ -59,12 +59,12 @@ public class CustomersApi extends HttpServlet {
         ArrayList resolve = new ArrayList();
             
         try {
-            // Cargar datos de todos los clientes
+            // Cargar datos de todos los vendedores
             Driver dao = DaoFactory.createDao();
-            ArrayList table = dao.getData("sp_customers_getall");
+            ArrayList table = dao.getData("sp_vendors_getall");
             for (Object row : table) {
-                customer = new CustomerBean((LinkedHashMap) row);
-                resolve.add(customer);
+                vendor = new VendorBean((LinkedHashMap) row);
+                resolve.add(vendor);
             }
             
             // Procesar respuesta JSON
@@ -81,25 +81,25 @@ public class CustomersApi extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("application/json");
-        customer = new Gson().fromJson(request.getParameter("customer"), CustomerBean.class);
+        vendor = new Gson().fromJson(request.getParameter("vendor"), VendorBean.class);
         
         try {
-            // Actualizar datos del cliente
+            // Actualizar datos del vendedor
             Driver dao = DaoFactory.createDao();
             ArrayList data = new ArrayList();
-            data.add(customer.getName());
-            data.add(customer.getChannel());
-            data.add(customer.getPhone());
-            data.add(customer.getEmail());
-            data.add(customer.getAddr());
-            data.add(customer.getDeals());
-            data.add(customer.getScore());
-            data.add(customer.getBlacklist());
-            data.add(customer.getNotes());
-            data.add(customer.getState());
+            data.add(vendor.getName());
+            data.add(vendor.getChannel());
+            data.add(vendor.getPhone());
+            data.add(vendor.getEmail());
+            data.add(vendor.getAddr());
+            data.add(vendor.getDeals());
+            data.add(vendor.getScore());
+            data.add(vendor.getMerit());
+            data.add(vendor.getNotes());
+            data.add(vendor.getState());
             data.add(request.getSession().getAttribute("user"));
             data.add(request.getSession().getAttribute("host"));
-            dao.exec("sp_customers_insert", data);
+            dao.exec("sp_vendors_insert", data);
 
             // Procesar estado http
             response.setStatus(201);
@@ -112,26 +112,26 @@ public class CustomersApi extends HttpServlet {
     @Override
     protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("application/json");
-        customer = new Gson().fromJson(Request.getParameter(request, "customer"), CustomerBean.class);
+        vendor = new Gson().fromJson(Request.getParameter(request, "vendor"), VendorBean.class);
         
         try {
-            // Actualizar datos del cliente
+            // Actualizar datos del vendedor
             Driver dao = DaoFactory.createDao();
             ArrayList data = new ArrayList();
-            data.add(customer.getId());
-            data.add(customer.getName());
-            data.add(customer.getChannel());
-            data.add(customer.getPhone());
-            data.add(customer.getEmail());
-            data.add(customer.getAddr());
-            data.add(customer.getDeals());
-            data.add(customer.getScore());
-            data.add(customer.getBlacklist());
-            data.add(customer.getNotes());
-            data.add(customer.getState());
+            data.add(vendor.getId());
+            data.add(vendor.getName());
+            data.add(vendor.getChannel());
+            data.add(vendor.getPhone());
+            data.add(vendor.getEmail());
+            data.add(vendor.getAddr());
+            data.add(vendor.getDeals());
+            data.add(vendor.getScore());
+            data.add(vendor.getMerit());
+            data.add(vendor.getNotes());
+            data.add(vendor.getState());
             data.add(request.getSession().getAttribute("user"));
             data.add(request.getSession().getAttribute("host"));
-            dao.exec("sp_customers_update", data);
+            dao.exec("sp_vendors_update", data);
 
             // Procesar estado http
             response.setStatus(200);

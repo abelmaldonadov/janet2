@@ -16,16 +16,22 @@
                 <div class="col">
                     <label class="ml-1">Producto</label>
                     <select disabled v-model="sale.inventoryId">
-                        <option v-for="item in arrInventories" :value="item.id">{{ item.productName }}</option>
+                        <option v-for="item in arrInventories" :value="item.id" v-if="item.state=='A'">{{ item.productName }} : {{ item.listPrice }}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <label class="ml-1">Vendedor</label>
+                    <select disabled v-model="sale.vendorId">
+                        <option v-for="item in arrVendors" :value="item.id" v-if="item.state=='A' && item.blacklist==0">{{ item.name }}</option>
                     </select>
                 </div>
             </div>
             <div class="row">
                 <div class="col">
                     <label class="ml-1">Cliente</label>
-                    <select disabled v-model="sale.customerId">
-                        <option v-for="item in arrCustomers" :value="item.id" v-if="item.state=='A'">{{ item.name }}</option>
-                    </select>
+                    <input type="text" v-model="sale.customer">
                 </div>
             </div>
             <div class="row">
@@ -35,7 +41,7 @@
                 </div>
                 <div class="col md-4">
                     <label class="ml-1">Cantidad</label>
-                    <input type="text" readonly v-model="sale.amount">
+                    <input type="number" readonly v-model="sale.amount">
                 </div>
                 <div class="col md-4">
                     <label class="ml-1">Subtotal</label>
@@ -57,6 +63,22 @@
                     <label class="ml-1">Estado</label>
                     <select v-model="sale.state">
                         <option v-for="item in info.states" :value="item.key">{{ item.value }}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col md-4">
+                    <label class="ml-1">H. Entrega</label>
+                    <input type="time" v-model="sale.deliveryTime">
+                </div>
+                <div class="col md-4">
+                    <label class="ml-1">Lugar de entrega</label>
+                    <input type="text" v-model="sale.deliveryPlace">
+                </div>
+                <div class="col md-4">
+                    <label class="ml-1">Método de entrega</label>
+                    <select v-model="sale.deliveryMethod">
+                        <option v-for="item in info.delivery" :value="item.key">{{ item.value }}</option>
                     </select>
                 </div>
             </div>

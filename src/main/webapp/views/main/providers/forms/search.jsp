@@ -22,7 +22,6 @@
                     <select id="select">
                         <option selected>Por Id</option>
                         <option>Por Nombre</option>
-                        <option>Por Plataforma</option>
                         <option>Por Canal</option>
                         <option>Por Web</option>
                         <option>Por Telefono</option>

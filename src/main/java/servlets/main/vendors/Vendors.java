@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package servlets.main.customers;
+package servlets.main.vendors;
 
 import java.io.IOException;
 import javax.servlet.RequestDispatcher;
@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author abelm
  */
-public class Customers extends HttpServlet {
+public class Vendors extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,11 +32,11 @@ public class Customers extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         
-        request.setAttribute("title", "Clientes");
+        request.setAttribute("title", "Vendedores");
         request.setAttribute("context", request.getContextPath());
         
         ServletContext sc = request.getServletContext();
-        RequestDispatcher rd = sc.getRequestDispatcher("/views/main/customers/customers.jsp");
+        RequestDispatcher rd = sc.getRequestDispatcher("/views/main/vendors/vendors.jsp");
         rd.forward(request, response);
     }
 }

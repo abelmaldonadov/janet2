@@ -12,7 +12,7 @@ import java.util.LinkedHashMap;
  *
  * @author abelm
  */
-public class CustomerBean implements Serializable {
+public class VendorBean implements Serializable {
     
     private String id;
     private String name;
@@ -22,7 +22,7 @@ public class CustomerBean implements Serializable {
     private String addr;
     private String deals;
     private String score;
-    private String blacklist;
+    private String merit;
     private String notes;
     private String state;
     
@@ -33,21 +33,21 @@ public class CustomerBean implements Serializable {
     private String dateUpd;
     private String hostUpd;
     
-    public CustomerBean() {
+    public VendorBean() {
     }
     
-    public CustomerBean(LinkedHashMap row) {
-        this.id = String.valueOf(row.get("cus_id"));
-        this.name = String.valueOf(row.get("cus_name"));
-        this.channel = String.valueOf(row.get("cus_channel"));
-        this.phone = String.valueOf(row.get("cus_phone"));
-        this.email = String.valueOf(row.get("cus_email"));
-        this.addr = String.valueOf(row.get("cus_addr"));
-        this.deals = String.valueOf(row.get("cus_deals"));
-        this.score = String.valueOf(row.get("cus_score"));
-        this.blacklist = String.valueOf(row.get("cus_blacklist"));
-        this.notes = String.valueOf(row.get("cus_notes"));
-        this.state = String.valueOf(row.get("cus_state"));
+    public VendorBean(LinkedHashMap row) {
+        this.id = String.valueOf(row.get("ven_id"));
+        this.name = String.valueOf(row.get("ven_name"));
+        this.channel = String.valueOf(row.get("ven_channel"));
+        this.phone = String.valueOf(row.get("ven_phone"));
+        this.email = String.valueOf(row.get("ven_email"));
+        this.addr = String.valueOf(row.get("ven_addr"));
+        this.deals = String.valueOf(row.get("ven_deals"));
+        this.score = String.valueOf(row.get("ven_score"));
+        this.merit = String.valueOf(row.get("ven_merit"));
+        this.notes = String.valueOf(row.get("ven_notes"));
+        this.state = String.valueOf(row.get("ven_state"));
         
         this.userIns = String.valueOf(row.get("audi_user_ins"));
         this.dateIns = String.valueOf(row.get("audi_date_ins"));
@@ -121,12 +121,12 @@ public class CustomerBean implements Serializable {
         this.score = score;
     }
 
-    public String getBlacklist() {
-        return blacklist;
+    public String getMerit() {
+        return merit;
     }
 
-    public void setBlacklist(String blacklist) {
-        this.blacklist = blacklist;
+    public void setMerit(String merit) {
+        this.merit = merit;
     }
 
     public String getNotes() {

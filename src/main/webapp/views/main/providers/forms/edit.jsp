@@ -45,7 +45,9 @@
             <div class="row">
                 <div class="col md-6">
                     <label class="ml-1">Canal</label>
-                    <input type="text" v-model="provider.channel">
+                    <select v-model="provider.channel">
+                        <option v-for="item in info.channel" :value="item.key">{{ item.value }}</option>
+                    </select>
                 </div>
                 <div class="col md-6">
                     <label class="ml-1">Web</label>

@@ -26,6 +26,7 @@ public class InfoBean implements Serializable {
     private ArrayList category = new ArrayList();
     private ArrayList tags = new ArrayList();
     private ArrayList channel = new ArrayList();
+    private ArrayList delivery = new ArrayList();
     
     public InfoBean() {
     }
@@ -42,7 +43,16 @@ public class InfoBean implements Serializable {
             else if (id.equals("5")) this.category.add(new AuxBean(newRow));
             else if (id.equals("6")) this.tags.add(new AuxBean(newRow));
             else if (id.equals("7")) this.channel.add(new AuxBean(newRow));
+            else if (id.equals("8")) this.delivery.add(new AuxBean(newRow));
         }
+    }
+
+    public ArrayList getDelivery() {
+        return delivery;
+    }
+
+    public void setDelivery(ArrayList delivery) {
+        this.delivery = delivery;
     }
 
     public ArrayList getCategory() {

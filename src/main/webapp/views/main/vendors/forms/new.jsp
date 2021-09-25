@@ -8,36 +8,36 @@
 <div class="modal" id="newModal">
     <div class="content white">
         <div class="modal-header">
-            <h4>Nuevo Cliente</h4>
+            <h4>Nuevo vendedor</h4>
         </div>
         <div class="modal-body">
 
             <div class="row">
                 <div class="col">
                     <label class="ml-1">Nombre</label>
-                    <input type="text" v-model="customer.name">
+                    <input type="text" v-model="vendor.name">
                 </div>
             </div>
             <div class="row">
                 <div class="col md-3">
                     <label class="ml-1">Tratos hechos</label>
-                    <input type="text" v-model="customer.deals">
+                    <input type="text" v-model="vendor.deals">
                 </div>
                 <div class="col md-3">
                     <label class="ml-1">Calificación</label>
-                    <select v-model="customer.score">
+                    <select v-model="vendor.score">
                         <option v-for="item in info.score" :value="item.key">{{ item.value }}</option>
                     </select>
                 </div>
                 <div class="col md-3">
-                    <label class="ml-1">Lista negra</label>
-                    <select v-model="customer.blacklist">
+                    <label class="ml-1">Mérito</label>
+                    <select v-model="vendor.merit">
                         <option v-for="item in info.bool" :value="item.key">{{ item.value }}</option>
                     </select>
                 </div>
                 <div class="col md-3">
                     <label class="ml-1">Estado</label>
-                    <select v-model="customer.state">
+                    <select v-model="vendor.state">
                         <option v-for="item in info.states" :value="item.key">{{ item.value }}</option>
                     </select>
                 </div>
@@ -45,21 +45,21 @@
             <div class="row">
                 <div class="col md-6">
                     <label class="ml-1">Teléfono</label>
-                    <input type="text" v-model="customer.phone">
+                    <input type="text" v-model="vendor.phone">
                 </div>
                 <div class="col md-6">
                     <label class="ml-1">Correo electrónico</label>
-                    <input type="text" v-model="customer.email">
+                    <input type="text" v-model="vendor.email">
                 </div>
             </div>
             <div class="row">
                 <div class="col md-6">
                     <label class="ml-1">Dirección</label>
-                    <input type="text" v-model="customer.addr">
+                    <input type="text" v-model="vendor.addr">
                 </div>
                 <div class="col md-6">
                     <label class="ml-1">Canal</label>
-                    <select v-model="customer.channel">
+                    <select v-model="vendor.channel">
                         <option v-for="item in info.channel" :value="item.key">{{ item.value }}</option>
                     </select>
                 </div>
@@ -67,14 +67,14 @@
             <div class="row">
                 <div class="col">
                     <label class="ml-1">Notas</label>
-                    <textarea type="text" v-model="customer.notes" rows="5"></textarea>
+                    <textarea type="text" v-model="vendor.notes" rows="5"></textarea>
                 </div>
             </div>
 
         </div>
         <div class="modal-footer">
             <button class="btn l-red modal-close">Cancelar</button>
-            <button class="btn l-notify modal-close" @click="customerInsert">Guardar</button>
+            <button class="btn l-notify modal-close" @click="vendorInsert">Guardar</button>
         </div>
     </div>
 </div>

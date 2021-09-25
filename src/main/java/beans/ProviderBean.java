@@ -16,7 +16,6 @@ public class ProviderBean implements Serializable {
     
     private String id;
     private String name;
-    private String plataform;
     private String channel;
     private String web;
     private String phone;
@@ -40,7 +39,6 @@ public class ProviderBean implements Serializable {
     public ProviderBean(LinkedHashMap row) {
         this.id = String.valueOf(row.get("pro_id"));
         this.name = String.valueOf(row.get("pro_name"));
-        this.plataform = String.valueOf(row.get("pro_plataform"));
         this.channel = String.valueOf(row.get("pro_channel"));
         this.web = String.valueOf(row.get("pro_web"));
         this.phone = String.valueOf(row.get("pro_phone"));
@@ -81,14 +79,6 @@ public class ProviderBean implements Serializable {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getPlataform() {
-        return plataform;
-    }
-
-    public void setPlataform(String plataform) {
-        this.plataform = plataform;
     }
 
     public String getChannel() {

@@ -16,10 +16,9 @@
             <table class="table">
                 <thead>
                     <tr>
+                        <th>Id</th>
                         <th>Fecha</th>
                         <th>Producto</th>
-                        <th>P. Unitario</th>
-                        <th>Cantidad</th>
                         <th>Subtotal</th>
                         <th>F. Entrega</th>
                         <th>Pago</th>
@@ -27,14 +26,13 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="item in arrSales">
-                        <th>{{ item.dateIns }}</th>
+                    <tr v-for="item in arrSales10Comp">
+                        <th>{{ item.id }}</th>
+                        <td>{{ item.dateIns }}</td>
                         <td>{{ item.productName }}</td>
-                        <td>{{ item.unitPrice }}</td>
-                        <td>{{ item.amount }}</td>
                         <td>{{ item.totalPrice }}</td>
                         <td>{{ item.deliveryDate }}</td>
-                        <td>{{ item.payment }}</td>
+                        <td>{{ getAux("bool", item.payment).value }}</td>
                         <td>{{ getAux("states", item.state).value }}</td>
                         <td class="w-10px" 
                             onclick="Mandarina.modalShow('#editModal')" 

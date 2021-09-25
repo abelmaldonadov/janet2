@@ -68,13 +68,6 @@ public class Home extends HttpServlet {
         try {
             Driver dao = DaoFactory.createDao();
             
-            // Obtener datos de usuario
-            ArrayList arrParams = new ArrayList();
-            arrParams.add("AMALDONADO");
-            ArrayList tableUsers = dao.getData("sp_users_get", arrParams);
-            user = new UserBean((LinkedHashMap) tableUsers.get(0));
-            request.setAttribute("user", user);
-            
             // Obtener áreas disponibles
             ArrayList tableAreas = dao.getData("sp_areas_getall");
             ArrayList arrAreas = new ArrayList();
@@ -109,7 +102,7 @@ public class Home extends HttpServlet {
         try {
             // Cargar datos de ususario
             ArrayList arrParams = new ArrayList();
-            arrParams.add("AMALDONADO");
+            arrParams.add(request.getSession().getAttribute("user"));
             Driver dao = DaoFactory.createDao();
             ArrayList table = dao.getData("sp_users_get", arrParams);
             user = new UserBean((LinkedHashMap) table.get(0));

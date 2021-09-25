@@ -84,11 +84,10 @@ public class ProvidersApi extends HttpServlet {
         provider = new Gson().fromJson(request.getParameter("provider"), ProviderBean.class);
         
         try {
-            // Actualizar datos de la compra
+            // Insertar datos del proveedor
             Driver dao = DaoFactory.createDao();
             ArrayList data = new ArrayList();
             data.add(provider.getName());
-            data.add(provider.getPlataform());
             data.add(provider.getChannel());
             data.add(provider.getWeb());
             data.add(provider.getPhone());
@@ -116,12 +115,11 @@ public class ProvidersApi extends HttpServlet {
         provider = new Gson().fromJson(Request.getParameter(request, "provider"), ProviderBean.class);
         
         try {
-            // Actualizar datos de la compra
+            // Actualizar datos del proveedor
             Driver dao = DaoFactory.createDao();
             ArrayList data = new ArrayList();
             data.add(provider.getId());
             data.add(provider.getName());
-            data.add(provider.getPlataform());
             data.add(provider.getChannel());
             data.add(provider.getWeb());
             data.add(provider.getPhone());

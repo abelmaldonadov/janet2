@@ -21,6 +21,7 @@
                 <a class="item" href="#">Productos</a>
                 <a class="item" href="#">Compras</a>
                 <a class="item" href="#">Ventas</a>
+                <a class="item" href="#">Clientes</a>
                 <a class="item" href="#">Tiendas</a>
                 <a class="item" href="#">Usuarios</a>
             </div>

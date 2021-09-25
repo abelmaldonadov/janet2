@@ -34,17 +34,19 @@
                         <tr>
                             <th>#</th>
                             <th>Nombre</th>
-                            <th>Plataforma</th>
+                            <th>Canal</th>
+                            <th>Web</th>
                             <th>Tratos</th>
                             <th>Calificación</th>
                             <th>Estado</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="item in arrProviders10Comp">
+                        <tr v-for="item in arrProviders">
                             <th>{{ item.id }}</th>
                             <td>{{ item.name }}</td>
-                            <td>{{ item.plataform }}</td>
+                            <td>{{ getAux("channel", item.channel).value }}</td>
+                            <td>{{ item.web }}</td>
                             <td>{{ item.deals }}</td>
                             <td>{{ getAux("score", item.score).value }}</td>
                             <td>{{ getAux("states", item.state).value }}</td>
