@@ -6,9 +6,9 @@
 
 <!-- MODAL -->
 <div class="modal" id="allModal">
-    <div class="content white">
+    <div class="modal-content white">
         <div class="modal-header">
-            <h4>Todas las compras</h4>
+            <h5>Todas las compras</h5>
         </div>
         <div class="modal-body">
 
@@ -17,23 +17,28 @@
                 <thead>
                     <tr>
                         <th>Fecha</th>
-                        <th>Cantidad</th>
                         <th>Producto</th>
                         <th>Proveedor</th>
                         <th>F. Llegada</th>
+                        <th>Unitario</th>
+                        <th>Cantidad</th>
+                        <th>Subtotal</th>
                         <th>Estado</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="item in arrPurchases">
+                    <tr v-for="item in arrPurchases10Comp">
                         <th>{{ item.dateIns }}</th>
-                        <td>{{ item.amount }}</td>
                         <td>{{ item.productName }}</td>
                         <td>{{ item.providerName }}</td>
                         <td>{{ item.arrivalDate }}</td>
-                        <td>{{ getAux("states", item.state).value }}</td>
+                        <td>{{ item.unitary }}</td>
+                        <td>{{ item.quantity }}</td>
+                        <td>{{ item.totalCost }}</td>
+                        <td :class="'text-'+getAux('states', item.state).color">{{ getAux("states", item.state).value }}</td>
                         <td class="w-10px" 
-                            onclick="Mandarina.modalShow('#editModal')" 
+                            onclick="show('#editModal')" 
                             @click="purchaseGet(item)">&#128221;</td> <!--Editar-->
                     </tr>
                 </tbody>
@@ -41,7 +46,7 @@
 
         </div>
         <div class="modal-footer">
-            <button class="btn l-notify modal-close">Cerrar</button>
+            <button class="btn notify modal-close">Cerrar</button>
         </div>
     </div>
 </div>

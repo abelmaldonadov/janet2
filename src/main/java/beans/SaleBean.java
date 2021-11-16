@@ -14,30 +14,31 @@ import java.util.LinkedHashMap;
  */
 public class SaleBean implements Serializable {
     
-    private String id;
-    private String inventoryId;
-    private String unitPrice;
-    private String amount;
-    private String totalPrice;
-    private String deliveryDate;
-    private String payment;
-    private String vendorId;
-    private String notes;
-    private String state;
+    private String id = "";
+    private String inventoryId = "";
+    private String unitPrice = "";
+    private String quantity = "";
+    private String totalPrice = "";
+    private String deliveryDate = "";
+    private String payment = "";
+    private String channel = "";
+    private String vendorId = "";
+    private String notes = "";
+    private String state = "";
     
-    private String productName;
-    private String vendorName;
-    private String deliveryTime;
-    private String deliveryPlace;
-    private String deliveryMethod;
-    private String customer;
+    private String productName = "";
+    private String vendorName = "";
+    private String deliveryTime = "";
+    private String deliveryPlace = "";
+    private String deliveryMethod = "";
+    private String customer = "";
     
-    private String userIns;
-    private String dateIns;
-    private String hostIns;
-    private String userUpd;
-    private String dateUpd;
-    private String hostUpd;
+    private String userIns = "";
+    private String dateIns = "";
+    private String hostIns = "";
+    private String userUpd = "";
+    private String dateUpd = "";
+    private String hostUpd = "";
     
     public SaleBean() {
     }
@@ -46,10 +47,11 @@ public class SaleBean implements Serializable {
         this.id = String.valueOf(row.get("sal_id"));
         this.inventoryId = String.valueOf(row.get("sal_inventory_id"));
         this.unitPrice = String.valueOf(row.get("sal_unit_price"));
-        this.amount = String.valueOf(row.get("sal_amount"));
+        this.quantity = String.valueOf(row.get("sal_quantity"));
         this.totalPrice = String.valueOf(row.get("sal_total_price"));
         this.deliveryDate = String.valueOf(row.get("sal_delivery_date"));
         this.payment = String.valueOf(row.get("sal_payment"));
+        this.channel = String.valueOf(row.get("sal_channel"));
         this.vendorId = String.valueOf(row.get("sal_vendor_id"));
         this.notes = String.valueOf(row.get("sal_notes"));
         this.state = String.valueOf(row.get("sal_state"));
@@ -67,6 +69,14 @@ public class SaleBean implements Serializable {
         this.userUpd = String.valueOf(row.get("audi_user_upd"));
         this.dateUpd = String.valueOf(row.get("audi_date_upd"));
         this.hostUpd = String.valueOf(row.get("audi_host_upd"));
+    }
+
+    public String getChannel() {
+        return channel;
+    }
+
+    public void setChannel(String channel) {
+        this.channel = channel;
     }
 
     public String getVendorName() {
@@ -165,12 +175,12 @@ public class SaleBean implements Serializable {
         this.unitPrice = unitPrice;
     }
 
-    public String getAmount() {
-        return amount;
+    public String getQuantity() {
+        return quantity;
     }
 
-    public void setAmount(String amount) {
-        this.amount = amount;
+    public void setQuantity(String quantity) {
+        this.quantity = quantity;
     }
 
     public String getTotalPrice() {

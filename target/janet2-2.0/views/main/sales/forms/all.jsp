@@ -6,9 +6,9 @@
 
 <!-- MODAL -->
 <div class="modal" id="allModal">
-    <div class="content white">
+    <div class="modal-content white">
         <div class="modal-header">
-            <h4>Todas las ventas</h4>
+            <h5>Todas las ventas</h5>
         </div>
         <div class="modal-body">
 
@@ -17,33 +17,32 @@
                 <thead>
                     <tr>
                         <th>Id</th>
-                        <th>Fecha</th>
                         <th>Producto</th>
+                        <th>Cliente</th>
                         <th>Subtotal</th>
                         <th>F. Entrega</th>
-                        <th>Pago</th>
+                        <th>Pagado</th>
+                        <th>Canal</th>
                         <th>Estado</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="item in arrSales10Comp">
+                    <tr v-for="item in arrSales" onclick="show('#editModal')" @click="saleGet(item)">
                         <th>{{ item.id }}</th>
-                        <td>{{ item.dateIns }}</td>
                         <td>{{ item.productName }}</td>
+                        <td>{{ item.customer }}</td>
                         <td>{{ item.totalPrice }}</td>
                         <td>{{ item.deliveryDate }}</td>
-                        <td>{{ getAux("bool", item.payment).value }}</td>
-                        <td>{{ getAux("states", item.state).value }}</td>
-                        <td class="w-10px" 
-                            onclick="Mandarina.modalShow('#editModal')" 
-                            @click="saleGet(item)">&#128221;</td> <!--Editar-->
+                        <td :class="'text-'+getAux('bool', item.payment).color">{{ getAux("bool", item.payment).value }}</td>
+                        <td>{{ getAux("paymentChannel", item.channel).value }}</td>
+                        <td :class="'text-'+getAux('states', item.state).color">{{ getAux("states", item.state).value }}</td>
                     </tr>
                 </tbody>
             </table>
 
         </div>
         <div class="modal-footer">
-            <button class="btn l-notify modal-close">Cerrar</button>
+            <button class="btn notify modal-close">Cerrar</button>
         </div>
     </div>
 </div>

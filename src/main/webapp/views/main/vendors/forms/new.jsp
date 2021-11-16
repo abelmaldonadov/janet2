@@ -6,9 +6,9 @@
 
 <!-- MODAL -->
 <div class="modal" id="newModal">
-    <div class="content white">
+    <div class="modal-content white">
         <div class="modal-header">
-            <h4>Nuevo vendedor</h4>
+            <h5>Nuevo vendedor</h5>
         </div>
         <div class="modal-body">
 
@@ -53,15 +53,9 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col md-6">
+                <div class="col">
                     <label class="ml-1">Dirección</label>
                     <input type="text" v-model="vendor.addr">
-                </div>
-                <div class="col md-6">
-                    <label class="ml-1">Canal</label>
-                    <select v-model="vendor.channel">
-                        <option v-for="item in info.channel" :value="item.key">{{ item.value }}</option>
-                    </select>
                 </div>
             </div>
             <div class="row">
@@ -73,8 +67,8 @@
 
         </div>
         <div class="modal-footer">
-            <button class="btn l-red modal-close">Cancelar</button>
-            <button class="btn l-notify modal-close" @click="vendorInsert">Guardar</button>
+            <button class="btn red modal-close">Cancelar</button>
+            <button class="btn green modal-close" @click="vendorInsert">Guardar</button>
         </div>
     </div>
 </div>

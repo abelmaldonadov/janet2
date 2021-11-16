@@ -16,47 +16,55 @@
         
         <%@include file="../../templates/navbar.jsp" %>
         
-        <main class="container" id="app">
+        <main class="container py-10" id="app">
             
-            <div class="radius shadow white p-2 mb-3 text-right">
+            <div class="shadow white p-2 my-3 text-right">
                 <button class="btn btn-lg ml-1 modal-open">&#128202;</button> <!--Reportes-->
                 <button class="btn btn-lg ml-1 modal-open" data-target="#searchModal">&#128269;</button> <!--Buscar-->
-                <button class="btn btn-lg ml-1 modal-open" data-target="#meritModal">&#11088;</button> <!--Mérito-->
                 <button class="btn btn-lg ml-1 modal-open" data-target="#allModal">&#128194;</button> <!--Todos-->
                 <button class="btn btn-lg ml-1 modal-open" data-target="#newModal" @click="clearForm">&#128195;</button> <!--Nuevo-->
             </div>
             
-            <div class="radius shadow white p-2 mb-3">
-                <h4 class="center mb-3">Vendedores recientes</h4>
-                <!-- TABLE -->
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Id</th>
-                            <th>Nombre</th>
-                            <th>Tratos</th>
-                            <th>Calificación</th>
-                            <th>Estado</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr v-for="item in arrVendors10Comp">
-                            <th>{{ item.id }}</th>
-                            <td>{{ item.name }}</td>
-                            <td>{{ item.deals }}</td>
-                            <td>{{ getAux("score", item.score).value }}</td>
-                            <td>{{ getAux("states", item.state).value }}</td>
-                            <td class="w-10px" 
-                                onclick="Mandarina.modalShow('#editModal')" 
-                                @click="vendorGet(item)">&#128221;</td>
-                        </tr>
-                    </tbody>
-                </table>
+            <div class="shadow white p-2 my-3">
+                
+                <div class="row">
+                    <div class="col lg-4" v-for="item in arrVendors10Comp">
+
+                        <div class="control border pointer" onclick="show('#editModal')" @click="vendorGet(item)">
+                            <div class="control-header">
+                                <h6>{{ item.name }}</h6>
+                            </div>
+                            <div class="control-body">
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td>Id Ven.</td>
+                                            <td>{{ item.id }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Ventas concretadas</td>
+                                            <td>{{ item.deals }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Calificación</td>
+                                            <td><span v-for="star in parseInt(item.score)">&#11088;</span></td>
+                                        </tr>
+                                        <tr :class="'text-'+getAux('states', item.state).color">
+                                            <td>Estado</td>
+                                            <td>{{ getAux("states", item.state).value }}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                
             </div>
             
             
             <%@include file="forms/search.jsp" %>
-            <%@include file="forms/merit.jsp" %>
             <%@include file="forms/all.jsp" %>
             <%@include file="forms/new.jsp" %>
             <%@include file="forms/edit.jsp" %>

@@ -6,9 +6,9 @@
 
 <!-- MODAL -->
 <div class="modal" id="editModal">
-    <div class="content white">
+    <div class="modal-content white">
         <div class="modal-header">
-            <h4>Editar proveedor: <span class="text-notify">{{ provider.name }}</span> / Id: <span class="text-notify">{{ provider.id }}</span></h4>
+            <h5>Editar proveedor: <span class="text-notify">{{ provider.id }}</span></h5>
         </div>
         <div class="modal-body">
 
@@ -21,7 +21,7 @@
             <div class="row">
                 <div class="col md-3">
                     <label class="ml-1">Tratos hechos</label>
-                    <input type="text" v-model="provider.deals">
+                    <input readonly type="text" v-model="provider.deals">
                 </div>
                 <div class="col md-3">
                     <label class="ml-1">Calificación</label>
@@ -73,8 +73,8 @@
 
         </div>
         <div class="modal-footer">
-            <button class="btn l-red modal-close">Cancelar</button>
-            <button class="btn l-notify modal-close" @click="providerUpdate">Guardar</button>
+            <button class="btn red modal-close">Cancelar</button>
+            <button class="btn green modal-close" @click="providerUpdate">Guardar</button>
         </div>
     </div>
 </div>

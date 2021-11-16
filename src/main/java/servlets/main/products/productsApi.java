@@ -5,7 +5,6 @@
  */
 package servlets.main.products;
 
-import beans.CostBean;
 import beans.ProductBean;
 import com.google.gson.Gson;
 import dao.Driver;
@@ -28,7 +27,6 @@ import utils.Request;
 public class ProductsApi extends HttpServlet {
     
     ProductBean product;
-    CostBean cost;
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -37,7 +35,7 @@ public class ProductsApi extends HttpServlet {
             response.setContentType("application/json");
             
             try {
-                // Cargar datos de la compra
+                // Cargar datos del producto
                 Driver dao = DaoFactory.createDao();
                 ArrayList data = new ArrayList();
                 data.add(request.getParameter("id"));
@@ -61,7 +59,7 @@ public class ProductsApi extends HttpServlet {
         LinkedHashMap resolve = new LinkedHashMap();
             
         try {
-            // Cargar datos de todas las compras
+            // Cargar datos de todos los productos
             Driver dao = DaoFactory.createDao();
             ArrayList tableProducts = dao.getData("sp_products_getall");
             ArrayList arrProducts = new ArrayList();
@@ -70,17 +68,8 @@ public class ProductsApi extends HttpServlet {
                 arrProducts.add(product);
             }
             
-            // Cargar datos de todos los proveedores
-            ArrayList tableCosts = dao.getData("sp_costs_getall");
-            ArrayList arrCosts = new ArrayList();
-            for (Object row : tableCosts) {
-                cost = new CostBean((LinkedHashMap) row);
-                arrCosts.add(cost);
-            }
-            
             //
             resolve.put("arrProducts", arrProducts);
-            resolve.put("arrCosts", arrCosts);
             
             // Procesar respuesta JSON
             try (PrintWriter out = response.getWriter()) {
@@ -99,7 +88,7 @@ public class ProductsApi extends HttpServlet {
         product = new Gson().fromJson(request.getParameter("product"), ProductBean.class);
         
         try {
-            // Actualizar datos de la compra
+            // Actualizar datos del producto
             Driver dao = DaoFactory.createDao();
             ArrayList data = new ArrayList();
             data.add(product.getCategory());
@@ -129,7 +118,7 @@ public class ProductsApi extends HttpServlet {
         product = new Gson().fromJson(Request.getParameter(request, "product"), ProductBean.class);
         
         try {
-            // Actualizar datos de la compra
+            // Actualizar datos del producto
             Driver dao = DaoFactory.createDao();
             ArrayList data = new ArrayList();
             data.add(product.getId());

@@ -6,9 +6,9 @@
 
 <!-- MODAL -->
 <div class="modal" id="editModal">
-    <div class="content white">
+    <div class="modal-content white">
         <div class="modal-header">
-            <h4>Editar inventario: <span class="text-notify">{{ inventory.id }}</span></h4>
+            <h5>Editar inventario: <span class="text-notify">{{ inventory.id }}</span></h5>
         </div>
         <div class="modal-body">
 
@@ -24,12 +24,12 @@
             </div>
             <div class="row">
                 <div class="col md-4">
-                    <label class="ml-1">Precio de lista</label>
-                    <input type="text" readonly v-model="inventory.listPrice">
-                </div>
-                <div class="col md-4">
                     <label class="ml-1">Id de compra</label>
                     <input type="text" readonly v-model="inventory.purchaseId">
+                </div>
+                <div class="col md-4">
+                    <label class="ml-1">Precio de lista</label>
+                    <input type="text" v-model="inventory.listPrice">
                 </div>
                 <div class="col md-4">
                     <label class="ml-1">Estado</label>
@@ -54,15 +54,21 @@
             </div>
             <div class="row">
                 <div class="col">
+                    <label class="ml-1">UPC</label>
+                    <input type="text" v-model="inventory.upc">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
                     <label class="ml-1">Notas</label>
-                    <textarea type="text" v-model="inventory.notes" rows="5"></textarea>
+                    <textarea v-model="inventory.notes" rows="5"></textarea>
                 </div>
             </div>
 
         </div>
         <div class="modal-footer">
-            <button class="btn l-red modal-close">Cancelar</button>
-            <button class="btn l-notify modal-close" @click="inventoryUpdate">Guardar</button>
+            <button class="btn red modal-close">Cancelar</button>
+            <button class="btn green modal-close" @click="inventoryUpdate">Guardar</button>
         </div>
     </div>
 </div>

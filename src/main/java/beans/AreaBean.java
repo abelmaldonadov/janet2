@@ -14,19 +14,18 @@ import java.util.LinkedHashMap;
  */
 public class AreaBean implements Serializable {
     
-    private String id;
-    private String name;
-    private String description;
-    private String route;
-    private String image;
-    private String state;
+    private String id = "";
+    private String name = "";
+    private String description = "";
+    private String route = "";
+    private String image = "";
+    private String state = "";
     
-    private String userIns;
-    private String dateIns;
-    private String hostIns;
-    private String userUpd;
-    private String dateUpd;
-    private String hostUpd;
+    private String notiTotal = "";
+    private String notiAct = "";
+    private String notiPen = "";
+    private String notiIna = "";
+    private String notiEli = "";
     
     public AreaBean() {
     }
@@ -39,12 +38,51 @@ public class AreaBean implements Serializable {
         this.image = String.valueOf(row.get("are_image"));
         this.state = String.valueOf(row.get("are_state"));
         
-        this.userIns = String.valueOf(row.get("audi_user_ins"));
-        this.dateIns = String.valueOf(row.get("audi_date_ins"));
-        this.hostIns = String.valueOf(row.get("audi_host_ins"));
-        this.userUpd = String.valueOf(row.get("audi_user_upd"));
-        this.dateUpd = String.valueOf(row.get("audi_date_upd"));
-        this.hostUpd = String.valueOf(row.get("audi_host_upd"));
+        this.notiTotal = String.valueOf(row.get("total"));
+        this.notiAct = String.valueOf(row.get("act"));
+        this.notiPen = String.valueOf(row.get("pen"));
+        this.notiIna = String.valueOf(row.get("ina"));
+        this.notiEli = String.valueOf(row.get("eli"));
+    }
+
+    public String getNotiTotal() {
+        return notiTotal;
+    }
+
+    public void setNotiTotal(String notiTotal) {
+        this.notiTotal = notiTotal;
+    }
+
+    public String getNotiAct() {
+        return notiAct;
+    }
+
+    public void setNotiAct(String notiAct) {
+        this.notiAct = notiAct;
+    }
+
+    public String getNotiPen() {
+        return notiPen;
+    }
+
+    public void setNotiPen(String notiPen) {
+        this.notiPen = notiPen;
+    }
+
+    public String getNotiIna() {
+        return notiIna;
+    }
+
+    public void setNotiIna(String notiIna) {
+        this.notiIna = notiIna;
+    }
+
+    public String getNotiEli() {
+        return notiEli;
+    }
+
+    public void setNotiEli(String notiEli) {
+        this.notiEli = notiEli;
     }
 
     public String getId() {
@@ -94,57 +132,5 @@ public class AreaBean implements Serializable {
     public void setState(String state) {
         this.state = state;
     }
-
-    public String getUserIns() {
-        return userIns;
-    }
-
-    public void setUserIns(String userIns) {
-        this.userIns = userIns;
-    }
-
-    public String getDateIns() {
-        return dateIns;
-    }
-
-    public void setDateIns(String dateIns) {
-        this.dateIns = dateIns;
-    }
-
-    public String getHostIns() {
-        return hostIns;
-    }
-
-    public void setHostIns(String hostIns) {
-        this.hostIns = hostIns;
-    }
-
-    public String getUserUpd() {
-        return userUpd;
-    }
-
-    public void setUserUpd(String userUpd) {
-        this.userUpd = userUpd;
-    }
-
-    public String getDateUpd() {
-        return dateUpd;
-    }
-
-    public void setDateUpd(String dateUpd) {
-        this.dateUpd = dateUpd;
-    }
-
-    public String getHostUpd() {
-        return hostUpd;
-    }
-
-    public void setHostUpd(String hostUpd) {
-        this.hostUpd = hostUpd;
-    }
-
-    
-    
-    
     
 }

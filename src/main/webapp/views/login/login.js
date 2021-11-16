@@ -12,16 +12,16 @@ var app = new Vue({
     },
     methods: {
         login() {
-            Mandarina.spinnerShow()
+            show('#gajo-spinner')
             let data = new URLSearchParams()
             data.append("user", this.user),
             data.append("password", this.password)
             fetch("login", {method:"post", body:data})
             .then(response => {
                 if (response.ok) location.href = "home"
-                else Mandarina.error({text:"Usuario o contraseña incorrectos"})
+                else sayError({text:"Usuario o contraseña incorrectos"})
             })
-            .finally(() => Mandarina.spinnerHide())
+            .finally(() => hide('#gajo-spinner'))
         }
     }
 })

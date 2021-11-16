@@ -6,9 +6,9 @@
 
 <!-- MODAL -->
 <div class="modal" id="newModal">
-    <div class="content white">
+    <div class="modal-content white">
         <div class="modal-header">
-            <h4>Nuevo proveedor</h4>
+            <h5>Nuevo proveedor</h5>
         </div>
         <div class="modal-body">
 
@@ -21,7 +21,7 @@
             <div class="row">
                 <div class="col md-3">
                     <label class="ml-1">Tratos hechos</label>
-                    <input type="number" v-model="provider.deals">
+                    <input readonly type="number" v-model="provider.deals">
                 </div>
                 <div class="col md-3">
                     <label class="ml-1">Calificación</label>
@@ -73,8 +73,8 @@
 
         </div>
         <div class="modal-footer">
-            <button class="btn l-red modal-close">Cancelar</button>
-            <button class="btn l-notify modal-close" @click="providerInsert">Guardar</button>
+            <button class="btn red modal-close">Cancelar</button>
+            <button class="btn green modal-close" @click="providerInsert">Guardar</button>
         </div>
     </div>
 </div>

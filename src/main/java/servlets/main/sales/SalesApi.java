@@ -115,7 +115,7 @@ public class SalesApi extends HttpServlet {
             ArrayList data = new ArrayList();
             data.add(sale.getInventoryId());
             data.add(sale.getUnitPrice());
-            data.add(sale.getAmount());
+            data.add(sale.getQuantity());
             data.add(sale.getTotalPrice());
             data.add(sale.getDeliveryDate());
             data.add(sale.getDeliveryTime());
@@ -123,6 +123,7 @@ public class SalesApi extends HttpServlet {
             data.add(sale.getDeliveryMethod());
             data.add(sale.getCustomer());
             data.add(sale.getPayment());
+            data.add(sale.getChannel());
             data.add(sale.getVendorId());
             data.add(sale.getNotes());
             data.add(sale.getState());
@@ -150,7 +151,7 @@ public class SalesApi extends HttpServlet {
             data.add(sale.getId());
             data.add(sale.getInventoryId());
             data.add(sale.getUnitPrice());
-            data.add(sale.getAmount());
+            data.add(sale.getQuantity());
             data.add(sale.getTotalPrice());
             data.add(sale.getDeliveryDate());
             data.add(sale.getDeliveryTime());
@@ -158,6 +159,7 @@ public class SalesApi extends HttpServlet {
             data.add(sale.getDeliveryMethod());
             data.add(sale.getCustomer());
             data.add(sale.getPayment());
+            data.add(sale.getChannel());
             data.add(sale.getVendorId());
             data.add(sale.getNotes());
             data.add(sale.getState());

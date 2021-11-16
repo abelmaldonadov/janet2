@@ -14,31 +14,42 @@ import java.util.LinkedHashMap;
  */
 public class PurchaseBean implements Serializable {
     
-    private String id;
-    private String amount;
-    private String productId;
-    private String providerId;
-    private String arrivalDate;
-    private String notes;
-    private String state;
+    private String id = "";
+    private String product = "";
+    private String shipping = "";
+    private String taxes = "";
+    private String others = "";
+    private String unitary = "";
+    private String quantity  = "";
+    private String totalCost = "";
+    private String productId = "";
+    private String providerId = "";
+    private String arrivalDate = "";
+    private String notes = "";
+    private String state = "";
     
-    private String providerName;
-    private String productName;
-    private String unitary;
+    private String providerName = "";
+    private String productName = "";
     
-    private String userIns;
-    private String dateIns;
-    private String hostIns;
-    private String userUpd;
-    private String dateUpd;
-    private String hostUpd;
+    private String userIns = "";
+    private String dateIns = "";
+    private String hostIns = "";
+    private String userUpd = "";
+    private String dateUpd = "";
+    private String hostUpd = "";
     
     public PurchaseBean() {
     }
     
     public PurchaseBean(LinkedHashMap row) {
         this.id = String.valueOf(row.get("pur_id"));
-        this.amount = String.valueOf(row.get("pur_amount"));
+        this.product = String.valueOf(row.get("pur_product"));
+        this.shipping = String.valueOf(row.get("pur_shipping"));
+        this.taxes = String.valueOf(row.get("pur_taxes"));
+        this.others = String.valueOf(row.get("pur_others"));
+        this.unitary = String.valueOf(row.get("pur_unitary"));
+        this.quantity = String.valueOf(row.get("pur_quantity"));
+        this.totalCost = String.valueOf(row.get("pur_total_cost"));
         this.productId = String.valueOf(row.get("pur_product_id"));
         this.providerId = String.valueOf(row.get("pur_provider_id"));
         this.arrivalDate = String.valueOf(row.get("pur_arrival_date"));
@@ -47,7 +58,6 @@ public class PurchaseBean implements Serializable {
         
         this.productName = String.valueOf(row.get("pur_product_name"));
         this.providerName = String.valueOf(row.get("pur_provider_name"));
-        this.unitary = String.valueOf(row.get("pur_unitary"));
         
         this.userIns = String.valueOf(row.get("audi_user_ins"));
         this.dateIns = String.valueOf(row.get("audi_date_ins"));
@@ -55,30 +65,6 @@ public class PurchaseBean implements Serializable {
         this.userUpd = String.valueOf(row.get("audi_user_upd"));
         this.dateUpd = String.valueOf(row.get("audi_date_upd"));
         this.hostUpd = String.valueOf(row.get("audi_host_upd"));
-    }
-
-    public String getUnitary() {
-        return unitary;
-    }
-
-    public void setUnitary(String unitary) {
-        this.unitary = unitary;
-    }
-
-    public String getProductName() {
-        return productName;
-    }
-
-    public void setProductName(String productName) {
-        this.productName = productName;
-    }
-
-    public String getProviderName() {
-        return providerName;
-    }
-
-    public void setProviderName(String providerName) {
-        this.providerName = providerName;
     }
 
     public String getId() {
@@ -89,12 +75,60 @@ public class PurchaseBean implements Serializable {
         this.id = id;
     }
 
-    public String getAmount() {
-        return amount;
+    public String getProduct() {
+        return product;
     }
 
-    public void setAmount(String amount) {
-        this.amount = amount;
+    public void setProduct(String product) {
+        this.product = product;
+    }
+
+    public String getShipping() {
+        return shipping;
+    }
+
+    public void setShipping(String shipping) {
+        this.shipping = shipping;
+    }
+
+    public String getTaxes() {
+        return taxes;
+    }
+
+    public void setTaxes(String taxes) {
+        this.taxes = taxes;
+    }
+
+    public String getOthers() {
+        return others;
+    }
+
+    public void setOthers(String others) {
+        this.others = others;
+    }
+
+    public String getUnitary() {
+        return unitary;
+    }
+
+    public void setUnitary(String unitary) {
+        this.unitary = unitary;
+    }
+
+    public String getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(String quantity) {
+        this.quantity = quantity;
+    }
+
+    public String getTotalCost() {
+        return totalCost;
+    }
+
+    public void setTotalCost(String totalCost) {
+        this.totalCost = totalCost;
     }
 
     public String getProductId() {
@@ -135,6 +169,22 @@ public class PurchaseBean implements Serializable {
 
     public void setState(String state) {
         this.state = state;
+    }
+
+    public String getProviderName() {
+        return providerName;
+    }
+
+    public void setProviderName(String providerName) {
+        this.providerName = providerName;
+    }
+
+    public String getProductName() {
+        return productName;
+    }
+
+    public void setProductName(String productName) {
+        this.productName = productName;
     }
 
     public String getUserIns() {
@@ -184,6 +234,6 @@ public class PurchaseBean implements Serializable {
     public void setHostUpd(String hostUpd) {
         this.hostUpd = hostUpd;
     }
-    
+
     
 }

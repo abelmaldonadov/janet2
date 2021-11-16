@@ -124,7 +124,6 @@ public class ProvidersApi extends HttpServlet {
             data.add(provider.getWeb());
             data.add(provider.getPhone());
             data.add(provider.getEmail());
-            data.add(provider.getDeals());
             data.add(provider.getScore());
             data.add(provider.getBlacklist());
             data.add(provider.getNotes());

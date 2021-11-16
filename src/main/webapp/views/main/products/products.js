@@ -7,87 +7,65 @@
 var app = new Vue({
     el: "#app",
     data: {
+        spinner: '#gajo-spinner',
         user: {},
         info: {},
         
         arrProducts: [],
-        product: {},
-        
-        arrCosts: [],
-        cost: {}
+        product: {}
     },
     methods: {
         productGet(item){
-            Mandarina.spinnerShow()
+            show(this.spinner)
             this.clearForm()
             fetch("productsApi?id="+item.id, {method:"get"})
             .then(response => response.json())
             .then(json => {
                 this.product = json
-                this.arrCosts.forEach(cost => {
-                    if (cost.productId == this.product.id && cost.selected == "1") this.cost = cost
-                })
             })
-            .catch(() => Mandarina.error({}))
-            .finally(() => Mandarina.spinnerHide())
+            .catch(() => sayError())
+            .finally(() => hide(this.spinner))
         },
         productGetAll(){
-            Mandarina.spinnerShow()
+            show(this.spinner)
             fetch("productsApi?all", {method:"get"})
             .then(response => response.json())
             .then(json => {
                 this.arrProducts = json.arrProducts
-                this.arrCosts = json.arrCosts
             })
-            .catch(() => Mandarina.error({}))
-            .finally(() => Mandarina.spinnerHide())
+            .catch(() => sayError())
+            .finally(() => hide(this.spinner))
         },
         productInsert(){
-            Mandarina.spinnerShow()
+            show(this.spinner)
             let data = new URLSearchParams()
             data.append("product", JSON.stringify(this.product))
             
             fetch("productsApi", {method:"post", body:data})
             .then(response => {
-                if (response.ok) Mandarina.ok({})
-                else Mandarina.error({})
+                if (response.ok) sayOk()
+                else sayError()
             })
-            .finally(() => Mandarina.spinnerHide() | this.productGetAll())
+            .finally(() => hide(this.spinner) | this.productGetAll())
         },
         productUpdate() {
-            Mandarina.spinnerShow()
+            show(this.spinner)
             let data = new URLSearchParams()
             data.append("product", JSON.stringify(this.product))
             
             fetch("productsApi", {method:"put", body:data})
             .then(response => {
-                if (response.ok) Mandarina.ok({})
-                else Mandarina.error({})
+                if (response.ok) sayOk()
+                else sayError()
             })
-            .finally(() => Mandarina.spinnerHide() | this.productGetAll())
+            .finally(() => hide(this.spinner) | this.productGetAll())
         },
         productDelete() {},
         productSearch() {},
         
         
-        costInsert() {
-            Mandarina.spinnerShow()
-            this.cost.productId = this.product.id
-            let data = new URLSearchParams()
-            data.append("cost", JSON.stringify(this.cost))
-            
-            fetch("costsApi", {method:"post", body:data})
-            .then(response => {
-                if (response.ok) Mandarina.ok({})
-                else Mandarina.error({})
-            })
-            .finally(() => Mandarina.spinnerHide() | this.productGetAll())
-        },
-        
-        
         clearForm() {
             this.product = {}
-            this.cost = {}
         },
         getAux(aux, key) {
             for (let item of this.info[aux]) {
@@ -106,13 +84,6 @@ var app = new Vue({
                 i++
             }
             return arrResolve10
-        },
-        ArrCostsForProductComp() {
-            let arrCosts = []
-            this.arrCosts.forEach(cost => {
-                if (cost.productId == this.product.id) arrCosts.push(cost) 
-            })
-            return arrCosts
         }
     },
     created() {
@@ -123,6 +94,6 @@ var app = new Vue({
             this.info = json.info
             this.productGetAll()
         })
-        .catch(() => Mandarina.error({text:"Se perdió la comunicación con el servidor"}))
+        .catch(() => sayError({text:"Se perdió la comunicación con el servidor"}))
     }
 })

@@ -7,6 +7,7 @@
 var app = new Vue({
     el: "#app",
     data: {
+        spinner: '#gajo-spinner',
         user: {},
         info: {},
         
@@ -15,44 +16,44 @@ var app = new Vue({
     },
     methods: {
         vendorGet(item){
-            Mandarina.spinnerShow()
+            show(this.spinner)
             fetch("vendorsApi?id="+item.id, {method:"get"})
             .then(response => response.json())
             .then(json => this.vendor = json)
-            .catch(() => Mandarina.error({}))
-            .finally(() => Mandarina.spinnerHide())
+            .catch(() => sayError())
+            .finally(() => hide(this.spinner))
         },
         vendorGetAll(){
-            Mandarina.spinnerShow()
+            show(this.spinner)
             fetch("vendorsApi?all", {method:"get"})
             .then(response => response.json())
             .then(json => this.arrVendors = json)
-            .catch(() => Mandarina.error({}))
-            .finally(() => Mandarina.spinnerHide())
+            .catch(() => sayError())
+            .finally(() => hide(this.spinner))
         },
         vendorInsert(){
-            Mandarina.spinnerShow()
+            show(this.spinner)
             let data = new URLSearchParams()
             data.append("vendor", JSON.stringify(this.vendor))
             
             fetch("vendorsApi", {method:"post", body:data})
             .then(response => {
-                if (response.ok) Mandarina.ok({})
-                else Mandarina.error({})
+                if (response.ok) sayOk()
+                else sayError()
             })
-            .finally(() => Mandarina.spinnerHide() | this.vendorGetAll())
+            .finally(() => hide(this.spinner) | this.vendorGetAll())
         },
         vendorUpdate() {
-            Mandarina.spinnerShow()
+            show(this.spinner)
             let data = new URLSearchParams()
             data.append("vendor", JSON.stringify(this.vendor))
             
             fetch("vendorsApi", {method:"put", body:data})
             .then(response => {
-                if (response.ok) Mandarina.ok({})
-                else Mandarina.error({})
+                if (response.ok) sayOk()
+                else sayError()
             })
-            .finally(() => Mandarina.spinnerHide() | this.vendorGetAll())
+            .finally(() => hide(this.spinner) | this.vendorGetAll())
         },
         vendorDelete() {},
         vendorSearch() {},
@@ -78,13 +79,6 @@ var app = new Vue({
                 i++
             }
             return arrResolve10
-        },
-        arrMeritComp() {
-            arrMerit = []
-            for (let item of this.arrVendors) {
-                if (item.merit == "1") arrMerit.push(item)
-            }
-            return arrMerit
         }
     },
     created() {
@@ -95,6 +89,6 @@ var app = new Vue({
             this.info = json.info
             this.vendorGetAll()
         })
-        .catch(() => Mandarina.error({text:"Se perdió la comunicación con el servidor"}))
+        .catch(() => sayError({text:"Se perdió la comunicación con el servidor"}))
     }
 })

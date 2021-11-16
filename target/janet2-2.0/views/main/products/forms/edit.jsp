@@ -6,9 +6,9 @@
 
 <!-- MODAL -->
 <div class="modal" id="editModal">
-    <div class="content white">
+    <div class="modal-content white">
         <div class="modal-header">
-            <h4>Editar producto: <span class="text-notify">{{ product.name }}</span> / Id: <span class="text-notify">{{ product.id }}</span></h4>
+            <h5>Editar producto: <span class="text-notify">{{ product.id }}</span></h5>
         </div>
         <div class="modal-body">
 
@@ -61,14 +61,14 @@
             <div class="row">
                 <div class="col">
                     <label class="ml-1">Notas</label>
-                    <textarea type="text" v-model="product.notes" rows="3"></textarea>
+                    <textarea type="text" v-model="product.notes" rows="5"></textarea>
                 </div>
             </div>
 
         </div>
         <div class="modal-footer">
-            <button class="btn l-red modal-close">Cancelar</button>
-            <button class="btn l-notify modal-close" @click="productUpdate">Guardar</button>
+            <button class="btn red modal-close">Cancelar</button>
+            <button class="btn green modal-close" @click="productUpdate">Guardar</button>
         </div>
     </div>
 </div>

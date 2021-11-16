@@ -7,26 +7,34 @@
 var app = new Vue({
     el: "#app",
     data: {
+        spinner: '#gajo-spinner',
         user: {},
         info: {},
         
         arrPurchases: [],
-        purchase: {},
+        purchase: {
+            product: 0,
+            shipping: 0,
+            taxes: 0,
+            others: 0,
+            unitary: 0,
+            quantity: 0
+        },
         
         arrProviders: [],
         arrProducts: []
     },
     methods: {
         purchaseGet(item){
-            Mandarina.spinnerShow()
+            show(this.spinner)
             fetch("purchasesApi?id="+item.id, {method:"get"})
             .then(response => response.json())
             .then(json => this.purchase = json)
-            .catch(() => Mandarina.error({}))
-            .finally(() => Mandarina.spinnerHide())
+            .catch(() => sayError())
+            .finally(() => hide(this.spinner))
         },
         purchaseGetAll(){
-            Mandarina.spinnerShow()
+            show(this.spinner)
             fetch("purchasesApi?all", {method:"get"})
             .then(response => response.json())
             .then(json => {
@@ -34,32 +42,32 @@ var app = new Vue({
                 this.arrProviders = json.arrProviders
                 this.arrProducts = json.arrProducts
             })
-            .catch(() => Mandarina.error({}))
-            .finally(() => Mandarina.spinnerHide())
+            .catch(() => sayError())
+            .finally(() => hide(this.spinner))
         },
         purchaseInsert(){
-            Mandarina.spinnerShow()
+            show(this.spinner)
             let data = new URLSearchParams()
             data.append("purchase", JSON.stringify(this.purchase))
             
             fetch("purchasesApi", {method:"post", body:data})
             .then(response => {
-                if (response.ok) Mandarina.ok({})
-                else Mandarina.error({})
+                if (response.ok) sayOk()
+                else sayError()
             })
-            .finally(() => Mandarina.spinnerHide() | this.purchaseGetAll())
+            .finally(() => hide(this.spinner) | this.purchaseGetAll())
         },
         purchaseUpdate() {
-            Mandarina.spinnerShow()
+            show(this.spinner)
             let data = new URLSearchParams()
             data.append("purchase", JSON.stringify(this.purchase))
             
             fetch("purchasesApi", {method:"put", body:data})
             .then(response => {
-                if (response.ok) Mandarina.ok({})
-                else Mandarina.error({})
+                if (response.ok) sayOk()
+                else sayError()
             })
-            .finally(() => Mandarina.spinnerHide() | this.purchaseGetAll())
+            .finally(() => hide(this.spinner) | this.purchaseGetAll())
         },
         purchaseDelete() {},
         purchaseSearch() {},
@@ -92,6 +100,13 @@ var app = new Vue({
                 if (item.state == "P") arrOrders.push(item)
             }
             return arrOrders
+        },
+        totalPurchasesComp() {
+            let totalPurchases = 0
+            for (let purchase of this.arrPurchases) {
+                totalPurchases += parseFloat(purchase.totalCost)
+            }
+            return totalPurchases.toFixed(2)
         }
     },
     created() {
@@ -102,6 +117,6 @@ var app = new Vue({
             this.info = json.info
             this.purchaseGetAll()
         })
-        .catch(() => Mandarina.error({text:"Se perdió la comunicación con el servidor"}))
+        .catch(() => sayError({text:"Se perdió la comunicación con el servidor"}))
     }
 })

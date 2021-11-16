@@ -14,19 +14,19 @@ import java.util.LinkedHashMap;
  */
 public class UserBean implements Serializable {
     
-    private String user;
-    private String name;
-    private String store;
-    private String role;
-    private String email;
-    private String state;
+    private String user = "";
+    private String name = "";
+    private String store = "";
+    private String role = "";
+    private String email = "";
+    private String state = "";
     
-    private String userIns;
-    private String dateIns;
-    private String hostIns;
-    private String userUpd;
-    private String dateUpd;
-    private String hostUpd;
+    private String userIns = "";
+    private String dateIns = "";
+    private String hostIns = "";
+    private String userUpd = "";
+    private String dateUpd = "";
+    private String hostUpd = "";
     
     public UserBean() {
     }

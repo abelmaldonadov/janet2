@@ -27,6 +27,7 @@ public class InfoBean implements Serializable {
     private ArrayList tags = new ArrayList();
     private ArrayList channel = new ArrayList();
     private ArrayList delivery = new ArrayList();
+    private ArrayList paymentChannel = new ArrayList();
     
     public InfoBean() {
     }
@@ -44,55 +45,8 @@ public class InfoBean implements Serializable {
             else if (id.equals("6")) this.tags.add(new AuxBean(newRow));
             else if (id.equals("7")) this.channel.add(new AuxBean(newRow));
             else if (id.equals("8")) this.delivery.add(new AuxBean(newRow));
+            else if (id.equals("9")) this.paymentChannel.add(new AuxBean(newRow));
         }
-    }
-
-    public ArrayList getDelivery() {
-        return delivery;
-    }
-
-    public void setDelivery(ArrayList delivery) {
-        this.delivery = delivery;
-    }
-
-    public ArrayList getCategory() {
-        return category;
-    }
-
-    public void setCategory(ArrayList category) {
-        this.category = category;
-    }
-
-    public ArrayList getTags() {
-        return tags;
-    }
-
-    public void setTags(ArrayList tags) {
-        this.tags = tags;
-    }
-
-    public ArrayList getChannel() {
-        return channel;
-    }
-
-    public void setChannel(ArrayList channel) {
-        this.channel = channel;
-    }
-
-    public ArrayList getBool() {
-        return bool;
-    }
-
-    public void setBool(ArrayList bool) {
-        this.bool = bool;
-    }
-
-    public ArrayList getScore() {
-        return score;
-    }
-
-    public void setScore(ArrayList score) {
-        this.score = score;
     }
 
     public boolean isProd() {
@@ -126,5 +80,62 @@ public class InfoBean implements Serializable {
     public void setTypeOfDocuments(ArrayList typeOfDocuments) {
         this.typeOfDocuments = typeOfDocuments;
     }
+
+    public ArrayList getBool() {
+        return bool;
+    }
+
+    public void setBool(ArrayList bool) {
+        this.bool = bool;
+    }
+
+    public ArrayList getScore() {
+        return score;
+    }
+
+    public void setScore(ArrayList score) {
+        this.score = score;
+    }
+
+    public ArrayList getCategory() {
+        return category;
+    }
+
+    public void setCategory(ArrayList category) {
+        this.category = category;
+    }
+
+    public ArrayList getTags() {
+        return tags;
+    }
+
+    public void setTags(ArrayList tags) {
+        this.tags = tags;
+    }
+
+    public ArrayList getChannel() {
+        return channel;
+    }
+
+    public void setChannel(ArrayList channel) {
+        this.channel = channel;
+    }
+
+    public ArrayList getDelivery() {
+        return delivery;
+    }
+
+    public void setDelivery(ArrayList delivery) {
+        this.delivery = delivery;
+    }
+
+    public ArrayList getPaymentChannel() {
+        return paymentChannel;
+    }
+
+    public void setPaymentChannel(ArrayList paymentChannel) {
+        this.paymentChannel = paymentChannel;
+    }
     
+
 }

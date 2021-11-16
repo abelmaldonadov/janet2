@@ -6,9 +6,9 @@
 
 <!-- MODAL -->
 <div class="modal" id="editModal">
-    <div class="content white">
+    <div class="modal-content white">
         <div class="modal-header">
-            <h4>Editar compra: <span class="text-notify">{{ purchase.id }}</span></h4>
+            <h5>Editar compra: <span class="text-notify">{{ purchase.id }}</span></h5>
         </div>
         <div class="modal-body">
 
@@ -16,28 +16,54 @@
                 <div class="col">
                     <label class="ml-1">Producto</label>
                     <select disabled v-model="purchase.productId">
-                        <option v-for="item in arrProducts" :value="item.id">{{ item.name }} : {{ item.unitary }}</option>
+                        <option v-for="item in arrProducts" :value="item.id">{{ item.name }}</option>
                     </select>
                 </div>
             </div>
             <div class="row">
-                <div class="col">
+                <div class="col md-9">
                     <label class="ml-1">Proveedor</label>
                     <select disabled v-model="purchase.providerId">
                         <option v-for="item in arrProviders" :value="item.id">{{ item.name }}</option>
                     </select>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col md-4">
-                    <label class="ml-1">Cantidad</label>
-                    <input readonly type="number" min="0" v-model="purchase.amount">
-                </div>
-                <div class="col md-4">
+                <div class="col md-3">
                     <label class="ml-1">Fecha de llegada</label>
                     <input type="date" v-model="purchase.arrivalDate">
                 </div>
-                <div class="col md-4">
+            </div>
+            <div class="row">
+                <div class="col md-3">
+                    <label class="ml-1">Costo del producto</label>
+                    <input type="number" min="0" v-model="purchase.product">
+                </div>
+                <div class="col md-3">
+                    <label class="ml-1">Costo del envío</label>
+                    <input type="number" v-model="purchase.shipping">
+                </div>
+                <div class="col md-3">
+                    <label class="ml-1">Costo impuestos</label>
+                    <input type="number" v-model="purchase.taxes">
+                </div>
+                <div class="col md-3">
+                    <label class="ml-1">Otros costos</label>
+                    <input type="number" v-model="purchase.others">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col md-3">
+                    <label class="ml-1">Costo unitario</label>
+                    <input type="number" min="0" v-model="purchase.unitary">
+                </div>
+                <div class="col md-3">
+                    <label class="ml-1">Cantidad</label>
+                    <input readonly type="number" min="0" v-model="purchase.quantity">
+                </div>
+                <div class="col md-3">
+                    <label class="ml-1">Subtotal</label>
+                    <input type="number" min="0" v-model="purchase.totalCost">
+                </div>
+                <div class="col md-3">
                     <label class="ml-1">Estado</label>
                     <select v-model="purchase.state">
                         <option v-for="item in info.states" :value="item.key">{{ item.value }}</option>
@@ -53,8 +79,8 @@
 
         </div>
         <div class="modal-footer">
-            <button class="btn l-red modal-close">Cancelar</button>
-            <button class="btn l-notify modal-close" @click="purchaseUpdate">Guardar</button>
+            <button class="btn red modal-close">Cancelar</button>
+            <button class="btn green modal-close" @click="purchaseUpdate">Guardar</button>
         </div>
     </div>
 </div>

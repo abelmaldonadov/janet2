@@ -6,9 +6,9 @@
 
 <!-- MODAL -->
 <div class="modal" id="newModal">
-    <div class="content white">
+    <div class="modal-content white">
         <div class="modal-header">
-            <h4>Nuevo producto</h4>
+            <h5>Nuevo producto</h5>
         </div>
         <div class="modal-body">
 
@@ -61,14 +61,14 @@
             <div class="row">
                 <div class="col">
                     <label class="ml-1">Notas</label>
-                    <textarea type="text" v-model="product.notes" rows="3"></textarea>
+                    <textarea type="text" v-model="product.notes" rows="5"></textarea>
                 </div>
             </div>
 
         </div>
         <div class="modal-footer">
-            <button class="btn l-red modal-close">Cancelar</button>
-            <button class="btn l-notify modal-close" @click="productInsert">Guardar</button>
+            <button class="btn red modal-close">Cancelar</button>
+            <button class="btn green modal-close" @click="productInsert">Guardar</button>
         </div>
     </div>
 </div>

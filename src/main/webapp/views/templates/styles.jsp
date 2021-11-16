@@ -5,5 +5,5 @@
 --%>
 
 <!--Mandarina Css-->
-<link rel='stylesheet' href='${context}/styles/mandarina/mandarina.ini.css'>
+<link rel='stylesheet' href='${context}/styles/mandarina/mandarina.config.css'>
 <link rel='stylesheet' href='${context}/styles/mandarina/mandarina.css'>

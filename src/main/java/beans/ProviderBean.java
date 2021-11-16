@@ -14,24 +14,24 @@ import java.util.LinkedHashMap;
  */
 public class ProviderBean implements Serializable {
     
-    private String id;
-    private String name;
-    private String channel;
-    private String web;
-    private String phone;
-    private String email;
-    private String deals;
-    private String score;
-    private String blacklist;
-    private String notes;
-    private String state;
+    private String id = "";
+    private String name = "";
+    private String channel = "";
+    private String web = "";
+    private String phone = "";
+    private String email = "";
+    private String deals = "";
+    private String score = "";
+    private String blacklist = "";
+    private String notes = "";
+    private String state = "";
     
-    private String userIns;
-    private String dateIns;
-    private String hostIns;
-    private String userUpd;
-    private String dateUpd;
-    private String hostUpd;
+    private String userIns = "";
+    private String dateIns = "";
+    private String hostIns = "";
+    private String userUpd = "";
+    private String dateUpd = "";
+    private String hostUpd = "";
     
     public ProviderBean() {
     }

@@ -10,6 +10,7 @@ beans\AreaBean.class
 dao\Driver.class
 filters\sessionFilter.class
 servlets\main\vendors\Vendors.class
+servlets\main\sales\SalesReport.class
 dao\MysqlImpl.class
 factory\DaoFactory.class
 beans\ProductBean.class
@@ -17,8 +18,6 @@ servlets\login\Login.class
 servlets\main\inventory\Inventory.class
 servlets\main\users\Users.class
 beans\VendorBean.class
-servlets\main\products\productsApi.class
-servlets\main\products\CostsApi.class
 servlets\main\providers\Providers.class
 servlets\main\purchases\PurchasesApi.class
 beans\SaleBean.class
@@ -31,7 +30,7 @@ beans\PurchaseBean.class
 servlets\main\purchases\Purchases.class
 beans\UserBean.class
 servlets\main\inventory\InventoryApi.class
-beans\CostBean.class
 servlets\main\stores\Stores.class
 beans\AuxBean.class
 servlets\main\products\Products.class
+servlets\main\products\ProductsApi.class

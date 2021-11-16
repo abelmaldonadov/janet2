@@ -1,284 +1,391 @@
+"use strict";
 
-window.addEventListener("DOMContentLoaded", () => {
-
-    // Propiedades básicas
-    Mandarina.getAll("[data-height]").forEach( item => item.style.height += item.dataset.height )
-    Mandarina.getAll("[data-width]").forEach( item => item.style.width += item.dataset.width )
-    Mandarina.getAll("[data-bg]").forEach( item => item.style.backgroundImage += "url("+item.dataset.bg+")" )
-
-
-    // Iniciar Mandarina Dice
-    let dice = document.createElement("div")
-    dice.setAttribute("class", "mandarinaDice")
-    dice.setAttribute("id", "mandarinaDice")
-    Mandarina.get("body").appendChild(dice)
-
-
-    // Iniciar Mandarina Spinner
-    let spinner = document.createElement("div")
-    let content = document.createElement("div")
-    let mask1 = document.createElement("div")
-    let mask2 = document.createElement("div")
-    
-    spinner.setAttribute("class","mandarinaSpinner")
-    content.setAttribute("class","content")
-    mask1.setAttribute("class","mask1")
-    mask2.setAttribute("class","mask2")
-
-    spinner.appendChild(content)
-    spinner.appendChild(mask1)
-    spinner.appendChild(mask2)
-    Mandarina.get("body").appendChild(spinner)
-
-
-    // Iniciar Alert
-    Mandarina.getAll(".alert").forEach(alert => alert.addEventListener("click",() => {
-        alert.classList.add("alert-close")
-        setTimeout(() => {
-            alert.hidden = true
-        }, 500);
-    }))
-
-
-    // Iniciar Drawer
-    Mandarina.getAll(".drawer").forEach(drawer => {
-        let id = "#"+drawer.id //#DRAWER1
-        Mandarina.getAll(".drawer-open").forEach(btn => {
-            if (btn.dataset.target == id) {
-                btn.addEventListener("click", () => {
-                    drawer.classList.toggle("active")
-                    btn.classList.toggle("active")
-                })
-            }
-        })
-    })
-
-
-    // Iniciar Modal
-    Mandarina.getAll(".modal").forEach(modal => {
-        let id = "#"+modal.id // #MODAL1
-        // Abrir Modal
-        Mandarina.getAll(".modal-open").forEach(btn => {
-            if (btn.dataset.target == id) {
-                btn.addEventListener("click", () => {
-                    Mandarina.get(id).classList.add("active")
-                })
-            }
-        })
-        // Cerrar Modal
-        Mandarina.getAll(id+" .modal-close").forEach(btn => {
-            btn.addEventListener("click", () => {
-                Mandarina.get(id).classList.remove("active")
-            })
-        })
-    })
-
-
-    // Iniciar Navbar
-    Mandarina.getAll(".navbar .menu").forEach(menu => {
-        let id = "#" + menu.id // #MENU1
-        Mandarina.getAll(".menu-open").forEach(btn => {
-            if (btn.dataset.target == id) {
-                btn.addEventListener("click", () => {
-                    menu.classList.toggle("active")
-                    btn.classList.toggle("active")
-                })
-            }
-        })
-    })
-
-
-    // Iniciar Tab
-    Mandarina.getAll(".tab").forEach(tab => {
-        let id = "#"+tab.id
-        Mandarina.getAll(id+">.tab-header>.tab-open").forEach(tabOpen => {
-            tabOpen.addEventListener("click", () => {
-                // Desactivar todos los Tabs
-                Mandarina.getAll(id+">.tab-header>.tab-open, "+id+">.tab-body>.tab-content").forEach(elem => {
-                    elem.classList.remove("active")
-                })
-                // Activar Tab
-                tabOpen.classList.add("active")
-                Mandarina.get(id+">.tab-body>.tab-content"+tabOpen.dataset.target).classList.add("active")
-            })
-        })
-    })
-
-
-
-    // Ready
-    console.log("Mandarina is ready...\nCheck the documentation: https://mandarinacss.github.io/mandarina/")
-})
+///////////////////////////////////////////////////////////
+//                     GAJO SAY
+///////////////////////////////////////////////////////////
 
 /**
- * @name Mandarina
- * @author Mandarina
- * @version 2021/09/03
+ * Array de botones para enviar al gajo Say dentro del objeto Message
+ * @typedef {Object} btn
+ * @property {String} text Texto del boton
+ * @property {String} color Color del boton
  */
-class Mandarina
-{
-    // Métodos auxiliares
-    static get = (selector) => document.querySelector(selector)
-    static getAll = (selector) => document.querySelectorAll(selector)
+
+/**
+ * Objeto mensaje que recibe el gajo Say
+ * @typedef {Object} Message
+ * @property {String} title Titulo del mensaje
+ * @property {String} text Cuerpo del mensaje
+ * @property {String} icon Presets o iconos personalizados en formato decimal
+ * @property {Array<btn>} btn Configuracion de botones indexados
+ */
+
+/**
+ * Muestra un mensaje cualquiera
+ * @param {Message} message {title:'', text:'', btn:'', icon:''}
+ * @returns {void}
+ */
+var sayAny = function sayAny(message) {
+  return new Promise(function (resolve, reject) {
+    // Establecer icono
+    var icon;
+
+    switch (message.icon) {
+      case false:
+        icon = "❔";
+        break;
+
+      case "ok":
+        icon = "✔️";
+        break;
+
+      case "error":
+        icon = "❌";
+        break;
+
+      case "warning":
+        icon = "⚠️";
+        break;
+
+      case "info":
+        icon = "❔";
+        break;
+
+      default:
+        icon = message.icon;
+        break;
+    } // Desagregar objeto mensaje
 
 
-    // Métodos de Mandarina Dice
-    static dice(obj) {
-        return new Promise((resolve, reject) => {
-            // Establecer icono
-            let icon
-            switch (obj.icon) {
-                case false: icon = "❔"; break
-                case "ok": icon = "✔️"; break
-                case "error": icon = "❌";  break
-                case "warning": icon = "⚠️"; break
-                case "info": icon = "❔"; break
-                default: icon = obj.icon; break
-            }
-            // Desagregar objeto mensaje
-            let title   = obj.title?obj.title:"Aviso"
-            let text    = obj.text
-            let arrBtns = obj.btn?obj.btn:[{text:"Ok",color:"l-notify"}]
-            let body    = `
-                <div class="content white">
-                    <div class="dice-header" id="mandarinaDiceTitle">
-                        <h1>${icon}</h1>
-                        <h3>${title}</h3>
-                    </div>
-                    <div class="dice-body" id="mandarinaDiceText">
-                        <p>${text}</p>
-                    </div>
-                    <div class="dice-footer" id="mandarinaDiceBtns"></div>
-                </div>
-            `
-            // Escribir mensaje e Insertar botones
-            this.get("#mandarinaDice").innerHTML = body
-            this.get("#mandarinaDice").classList.add("active")
-            this.get("#mandarinaDice .content").classList.add("active")
-            var i = 0
-            arrBtns.forEach(btn => {
-                this.get("#mandarinaDice #mandarinaDiceBtns").innerHTML += `
-                    <button class="btn ${btn.color}" data-index="${i++}">${btn.text}</button>
-                `
-            })
-            document.querySelectorAll("#mandarinaDice button").forEach(btn => {
-                btn.addEventListener("click", e => {
-                    // Limpiar mensaje y resolver
-                    this.get("#mandarinaDice").innerHTML = ""
-                    this.get("#mandarinaDice").classList.remove("active")
-                    resolve(e.target.dataset.index)
-                })
-            })
-        })
-    }
-    static ok(obj){
-        return new Promise((resolve, reject) => {
-            let title   = obj.title?obj.title:"Enhorabuena"
-            let text    = obj.text?obj.text:"Completado con éxito"
-            let arrBtns = [{text:"Ok",color:"l-green"}]
-            this.dice({title:title, text:text, btn:arrBtns, icon:"ok"}).then(index => resolve(index))
-        })
-    }
-    static error(obj){
-        return new Promise((resolve, reject) => {
-            let title   = obj.title?obj.title:"Error"
-            let text    = obj.text?obj.text:"Ha ocurrido un error inesperado..."
-            let arrBtns = [{text:"Ok",color:"l-red"}]
-            this.dice({title:title, text:text, btn:arrBtns, icon:"error"}) .then(index => resolve(index))
-        })
-    }
-    static warning(obj){
-        return new Promise((resolve, reject) => {
-            let title   = obj.title?obj.title:"Atención"
-            let text    = obj.text?obj.text:"Está a punto de realizar cambios en el sistema"
-            let arrBtns = [{text:"Sí 👍",color:"l-green"}, {text:"No 👎",color:"l-red"}]
-            this.dice({title:title, text:text, btn:arrBtns, icon:"warning"}).then(index => resolve(index))
-        })
-    }
-    static info(obj){
-        return new Promise((resolve, reject) => {
-            let title   = obj.title?obj.title:"Notificación"
-            let text    = obj.text?obj.text:"¿Confirma que desea proceder con los cambios?"
-            let arrBtns = [{text:"Sí 👍",color:"l-green"}, {text:"No 👎",color:"l-red"}]
-            this.dice({title:title, text:text, btn:arrBtns, icon:"info"}).then(index => resolve(index))
-        })
-    }
+    var title = message.title ? message.title : "Aviso";
+    var text = message.text;
+    var arrBtns = message.btn ? message.btn : [{
+      text: "Ok",
+      color: "notify"
+    }];
+    var body = "\n            <div class=\"say-content white\">\n                <div class=\"say-header\" id=\"say-title\">\n                    <h1>".concat(icon, "</h1>\n                    <h5>").concat(title, "</h5>\n                </div>\n                <div class=\"say-body\" id=\"say-text\">\n                    <p>").concat(text, "</p>\n                </div>\n                <div class=\"say-footer\" id=\"say-btns\"></div>\n            </div>\n        "); // Escribir mensaje
+
+    var say = document.querySelector("#gajo-say");
+    say.innerHTML = body;
+    say.classList.add("active");
+    document.querySelector("#gajo-say .say-content").classList.add("active"); // Insertar botones
+
+    var i = 0;
+    arrBtns.forEach(function (btn) {
+      document.querySelector("#gajo-say #say-btns").innerHTML += "\n                <button class=\"btn ".concat(btn.color, "\" data-index=\"").concat(i++, "\">").concat(btn.text, "</button>\n            ");
+    });
+    document.querySelectorAll("#gajo-say button").forEach(function (btn) {
+      btn.addEventListener("click", function (e) {
+        // Limpiar mensaje y resolver
+        say.innerHTML = "";
+        say.classList.remove("active");
+        resolve(e.target.dataset.index);
+      });
+    });
+  });
+};
+/**
+ * Muestra un mensaje de conformidad
+ * @param {Object} [obj] {title:'', text:'', btn:'', icon:''}
+ * @returns {void}
+ */
 
 
-    // Métodos de Modal
-    static modalShow = (selector) => this.get(selector).classList.add("active")
-    static modalHide = (selector) => this.get(selector).classList.remove("active")
+var sayOk = function sayOk() {
+  var obj = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  return new Promise(function (resolve, reject) {
+    var title = obj.title ? obj.title : "Enhorabuena";
+    var text = obj.text ? obj.text : "Se completó la tarea con éxito";
+    var arrBtns = [{
+      text: "Ok",
+      color: "green"
+    }];
+    sayAny({
+      title: title,
+      text: text,
+      btn: arrBtns,
+      icon: "ok"
+    }).then(function (index) {
+      return resolve(index);
+    });
+  });
+};
+/**
+ * Muestra un mensaje de error
+ * @param {Object} [obj] {title:'', text:'', btn:'', icon:''}
+ * @returns {void}
+ */
 
 
-    // Métodos de Spinner
-    static spinnerShow = () => this.get(".mandarinaSpinner").classList.add("active")
-    static spinnerHide = () => this.get(".mandarinaSpinner").classList.remove("active")
+var sayError = function sayError() {
+  var obj = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  return new Promise(function (resolve, reject) {
+    var title = obj.title ? obj.title : "Error";
+    var text = obj.text ? obj.text : "No se pudo completar la tarea";
+    var arrBtns = [{
+      text: "Ok",
+      color: "red"
+    }];
+    sayAny({
+      title: title,
+      text: text,
+      btn: arrBtns,
+      icon: "error"
+    }).then(function (index) {
+      return resolve(index);
+    });
+  });
+};
+/**
+ * Muestra un mensaje de advertencia
+ * @param {Object} [obj] {title:'', text:'', btn:'', icon:''}
+ * @returns {void}
+ */
 
+
+var sayWarning = function sayWarning() {
+  var obj = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  return new Promise(function (resolve, reject) {
+    var title = obj.title ? obj.title : "Atención";
+    var text = obj.text ? obj.text : "¿Confirma que desea proceder con los cambios?";
+    var arrBtns = [{
+      text: "Sí",
+      color: "green"
+    }, {
+      text: "No",
+      color: "red"
+    }];
+    sayAny({
+      title: title,
+      text: text,
+      btn: arrBtns,
+      icon: "warning"
+    }).then(function (index) {
+      return resolve(index);
+    });
+  });
+};
+/**
+ * Muestra un mensaje informativo
+ * @param {Object} [obj] {title:'', text:'', btn:'', icon:''}
+ * @returns {void}
+ */
+
+
+var sayInfo = function sayInfo() {
+  var obj = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  return new Promise(function (resolve, reject) {
+    var title = obj.title ? obj.title : "Notificación";
+    var text = obj.text ? obj.text : "¿Confirma que desea proceder con los cambios?";
+    var arrBtns = [{
+      text: "Sí",
+      color: "green"
+    }, {
+      text: "No",
+      color: "red"
+    }];
+    sayAny({
+      title: title,
+      text: text,
+      btn: arrBtns,
+      icon: "info"
+    }).then(function (index) {
+      return resolve(index);
+    });
+  });
+}; ///////////////////////////////////////////////////////////
+//                     GAJO SLIDER
+///////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////
+//                     GAJO DATASET
+///////////////////////////////////////////////////////////
+
+/**
+ * Activar los dataset
+ */
+
+
+var listenDataSet = function listenDataSet() {
+  document.querySelectorAll("body *").forEach(function (item) {
+    if (item.dataset.height) item.style.height += item.dataset.height;
+    if (item.dataset.minHeight) item.style.minHeight += item.dataset.minHeight;
+    if (item.dataset.maxHeight) item.style.maxHeight += item.dataset.maxHeight;
+    if (item.dataset.width) item.style.width += item.dataset.width;
+    if (item.dataset.minWidth) item.style.minWidth += item.dataset.minWidth;
+    if (item.dataset.maxWidth) item.style.maxWidth += item.dataset.maxWidth;
+    if (item.dataset.bg) item.style.backgroundImage += "url(" + item.dataset.bg + ")";
+  });
+}; ///////////////////////////////////////////////////////////
+//                     GAJO ACTIVE
+///////////////////////////////////////////////////////////
+
+/**
+ * Activa un componente
+ * @param {String} selector Selector de etiqueta
+ * @returns {void}
+ */
+
+
+var show = function show(selector) {
+  return document.querySelector(selector).classList.add("active");
+};
+/**
+ * Desactiva un componente
+ * @param {String} selector Selector de etiqueta
+ * @returns {void}
+ */
+
+
+var hide = function hide(selector) {
+  return document.querySelector(selector).classList.remove("active");
+};
+/**
+ * Configuraciones iniciales
+ */
+
+
+window.addEventListener("DOMContentLoaded", function () {
+  /**
+   * Propiedades básicas dataSet
+   */
+  listenDataSet();
+  /**
+   * Iniciar Gajo Say
+   */
+
+  var say = document.createElement("div");
+  say.setAttribute("class", "say");
+  say.setAttribute("id", "gajo-say");
+  document.querySelector("body").appendChild(say);
+  /**
+   * Iniciar Gajo Spinner
+   */
+
+  var spinner = document.createElement("div");
+  var content = document.createElement("div");
+  var mask1 = document.createElement("div");
+  var mask2 = document.createElement("div");
+  spinner.setAttribute("class", "spinner");
+  spinner.setAttribute("id", "gajo-spinner");
+  content.setAttribute("class", "spinner-content");
+  mask1.setAttribute("class", "mask1");
+  mask2.setAttribute("class", "mask2");
+  spinner.appendChild(content);
+  spinner.appendChild(mask1);
+  spinner.appendChild(mask2);
+  document.querySelector("body").appendChild(spinner);
+  /**
+   * Iniciar Gajo Cabinet
+   */
+
+  document.querySelectorAll(".cabinet").forEach(function (cabinet) {
+    var id = "#" + cabinet.id; //#DRAWER1
+
+    document.querySelectorAll(".cabinet-open").forEach(function (btn) {
+      if (btn.dataset.target == id) {
+        btn.addEventListener("click", function () {
+          cabinet.classList.toggle("active");
+          btn.classList.toggle("active");
+        });
+      }
+    });
+  });
+  /**
+   * Iniciar Gajo Modal
+   */
+
+  document.querySelectorAll(".modal").forEach(function (modal) {
+    var id = "#" + modal.id; // #MODAL1
+    // Abrir Modal
+
+    document.querySelectorAll(".modal-open").forEach(function (btn) {
+      if (btn.dataset.target == id) {
+        btn.addEventListener("click", function () {
+          document.querySelector(id).classList.add("active");
+        });
+      }
+    }); // Cerrar Modal
+
+    document.querySelectorAll(id + " .modal-close").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        document.querySelector(id).classList.remove("active");
+      });
+    });
+  });
+  /**
+   * Iniciar Gajo Navbar
+   */
+
+  document.querySelectorAll(".navbar .menu").forEach(function (menu) {
+    var id = "#" + menu.id; // #MENU1
+
+    document.querySelectorAll(".menu-open").forEach(function (btn) {
+      if (btn.dataset.target == id) {
+        btn.addEventListener("click", function () {
+          menu.classList.toggle("active");
+          btn.classList.toggle("active");
+        });
+      }
+    });
+  });
+  /**
+   * Iniciar Gajo Tab
+   */
+
+  document.querySelectorAll(".tab").forEach(function (tab) {
+    var id = "#" + tab.id;
+    document.querySelectorAll(id + ">.tab-header>.tab-open").forEach(function (tabOpen) {
+      if (tabOpen.classList.contains("disabled")) {
+        return;
+      }
+
+      tabOpen.addEventListener("click", function (e) {
+        // Desactivar todos los Tabs
+        document.querySelectorAll(id + ">.tab-header>.tab-open, " + id + ">.tab-body>.tab-content").forEach(function (elem) {
+          elem.classList.remove("active");
+        }); // Activar Tab
+
+        tabOpen.classList.add("active");
+        document.querySelector(id + ">.tab-body>.tab-content" + tabOpen.dataset.target).classList.add("active");
+      });
+    });
+  });
+  /**
+   * Ready
+   */
+
+  console.log("Mandarina is ready...\nCheck the documentation: https://mandarinadevs.github.io/mandarina/");
+});
+/**
+ * Test de Cheatsheet
+ */
+
+var testDocs = document.querySelector('#mandarina-test-docs');
+
+if (testDocs) {
+  document.querySelector('#testSpinner').addEventListener('click', function () {
+    show('#gajo-spinner');
+    setTimeout(function () {
+      hide('#gajo-spinner');
+    }, 3000);
+  });
+  document.querySelector('#testSayOk').addEventListener('click', function () {
+    return sayOk();
+  });
+  document.querySelector('#testSayError').addEventListener('click', function () {
+    return sayError();
+  });
+  document.querySelector('#testSayWarning').addEventListener('click', function () {
+    return sayWarning();
+  });
+  document.querySelector('#testSayInfo').addEventListener('click', function () {
+    return sayInfo();
+  });
+  document.querySelector('#testSayAny').addEventListener('click', function () {
+    return sayAny({
+      title: 'Título',
+      text: 'Algún texto personalizado',
+      icon: '&#8987;'
+    });
+  });
 }
-new Mandarina()
-
-
-
-
-
-/*
- *
- * COMPONENT : @Slider
- * AUTOR : Mandarina
- * FECHA : 2021/06/01
- * NOTA  : ""
- *
-*/
-class MandarinaSlider
-{
-    constructor(slider) {
-        this.slider = "#"+slider.id
-        this.animation = slider.dataset.animation // AUTO; OPACITY; SLIDE; RADIANCE
-        this.duration = slider.dataset.duration * 1000
-        this.minHeight = slider.dataset.minHeight
-        this.numFrames = slider.children.length
-
-        // PRESETS
-        if (screen.width < 900) {
-            slider.style.height = this.minHeight
-        }
-        slider.children[this.numFrames-1].classList.add("prev")
-        slider.children[0].classList.add("active")
-        slider.children[1].classList.add("next")
-
-        this.autoPlay()
-    }
-
-    async autoPlay() {
-        this.next(0)
-        let i = 1 // EL INDICE DEL FRAME ACTUAL
-        await new Promise(resolve => {
-            setInterval(() => {
-                this.next(i)
-                if (i == this.numFrames - 1) { i = 0 }
-                else { i++ }
-            }, this.duration);
-        })
-    }
-
-    next(i) {
-        let h // FRAME ANTERIOR
-        if (i == 0) { h = this.numFrames -1 }
-        else { h = i-1 }
-        let j // FRAME SIGUIENTE
-        if (i == this.numFrames - 1) { j = 0 }
-        else { j = i+1 }
-        // ACTIVAR EL FRAME ANTERIOR
-        document.querySelector(this.slider + " .item.prev").classList.remove("prev")
-        document.querySelector(this.slider).children[h].classList.add("prev")
-        // ACTIVAR FRAME ACTUAL
-        document.querySelector(this.slider + " .item.active").classList.remove("active")
-        document.querySelector(this.slider).children[i].classList.add("active")
-        // ACTIVAR FRAME SIGUIENTE
-        document.querySelector(this.slider + " .item.next").classList.remove("next")
-        document.querySelector(this.slider).children[j].classList.add("next")
-    }
-}
-document.querySelectorAll(".slider").forEach(slider => {
-    new MandarinaSlider(slider)
-})

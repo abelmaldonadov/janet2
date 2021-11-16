@@ -14,24 +14,23 @@ import java.util.LinkedHashMap;
  */
 public class VendorBean implements Serializable {
     
-    private String id;
-    private String name;
-    private String channel;
-    private String phone;
-    private String email;
-    private String addr;
-    private String deals;
-    private String score;
-    private String merit;
-    private String notes;
-    private String state;
+    private String id = "";
+    private String name = "";
+    private String phone = "";
+    private String email = "";
+    private String addr = "";
+    private String deals = "";
+    private String score = "";
+    private String merit = "";
+    private String notes = "";
+    private String state = "";
     
-    private String userIns;
-    private String dateIns;
-    private String hostIns;
-    private String userUpd;
-    private String dateUpd;
-    private String hostUpd;
+    private String userIns = "";
+    private String dateIns = "";
+    private String hostIns = "";
+    private String userUpd = "";
+    private String dateUpd = "";
+    private String hostUpd = "";
     
     public VendorBean() {
     }
@@ -39,7 +38,6 @@ public class VendorBean implements Serializable {
     public VendorBean(LinkedHashMap row) {
         this.id = String.valueOf(row.get("ven_id"));
         this.name = String.valueOf(row.get("ven_name"));
-        this.channel = String.valueOf(row.get("ven_channel"));
         this.phone = String.valueOf(row.get("ven_phone"));
         this.email = String.valueOf(row.get("ven_email"));
         this.addr = String.valueOf(row.get("ven_addr"));
@@ -72,15 +70,7 @@ public class VendorBean implements Serializable {
     public void setName(String name) {
         this.name = name;
     }
-
-    public String getChannel() {
-        return channel;
-    }
-
-    public void setChannel(String channel) {
-        this.channel = channel;
-    }
-
+    
     public String getPhone() {
         return phone;
     }

@@ -115,7 +115,13 @@ public class PurchasesApi extends HttpServlet {
             // Insertar datos de la compra
             Driver dao = DaoFactory.createDao();
             ArrayList data = new ArrayList();
-            data.add(purchase.getAmount());
+            data.add(purchase.getProduct());
+            data.add(purchase.getShipping());
+            data.add(purchase.getTaxes());
+            data.add(purchase.getOthers());
+            data.add(purchase.getUnitary());
+            data.add(purchase.getQuantity());
+            data.add(purchase.getTotalCost());
             data.add(purchase.getProductId());
             data.add(purchase.getProviderId());
             data.add(purchase.getArrivalDate());
@@ -143,7 +149,13 @@ public class PurchasesApi extends HttpServlet {
             Driver dao = DaoFactory.createDao();
             ArrayList data = new ArrayList();
             data.add(purchase.getId());
-            data.add(purchase.getAmount());
+            data.add(purchase.getProduct());
+            data.add(purchase.getShipping());
+            data.add(purchase.getTaxes());
+            data.add(purchase.getOthers());
+            data.add(purchase.getUnitary());
+            data.add(purchase.getQuantity());
+            data.add(purchase.getTotalCost());
             data.add(purchase.getProductId());
             data.add(purchase.getProviderId());
             data.add(purchase.getArrivalDate());

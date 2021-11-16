@@ -16,49 +16,55 @@
         
         <%@include file="../../templates/navbar.jsp" %>
         
-        <main class="container" id="app">
+        <main class="container py-10" id="app">
             
-            <div class="radius shadow white p-2 mb-3 text-right">
-                <button class="btn btn-lg ml-1 modal-open">&#128202;</button> <!--Reportes-->
-                <button class="btn btn-lg ml-1 modal-open" data-target="#searchModal">&#128269;</button> <!--Buscar-->
-                <button class="btn btn-lg ml-1 modal-open" data-target="#deliveriesModal">&#128198;</button> <!--Entregas-->
-                <button class="btn btn-lg ml-1 modal-open" data-target="#allModal">&#128194;</button> <!--Todos-->
-                <button class="btn btn-lg ml-1 modal-open" data-target="#newModal" @click="clearForm">&#128195;</button> <!--Nuevo-->
+            <div class="shadow white p-2 my-3 flex-between">
+                <div>
+                    <button class="btn btn-lg ml-1 flex-left" data-title="Total de ingresos">&#128200; S/ {{ totalSalesComp }}</button> <!--Total de ventas-->
+                    <button class="btn btn-lg ml-1 flex-left" data-title="Total de ingresos en efectivo">&#128181; S/ {{ totalSalesCashComp }}</button> <!--Total de ventas efectivo-->
+                    <button class="btn btn-lg ml-1 flex-left" data-title="Total de ingresos por bancos">&#127970; S/ {{ totalSalesBanksComp }}</button> <!--Total de ventas bancos-->
+                </div>
+                <div>
+                    <button class="btn btn-lg ml-1 modal-open" data-title="Reportes">&#128202;</button> <!--Reportes-->
+                    <button class="btn btn-lg ml-1 modal-open" data-title="Buscar" data-target="#searchModal">&#128269;</button> <!--Buscar-->
+                    <button class="btn btn-lg ml-1 modal-open" data-title="Entregas pendientes" data-target="#deliveriesModal">&#128198;</button> <!--Entregas-->
+                    <button class="btn btn-lg ml-1 modal-open" data-title="Todas las ventas" data-target="#allModal">&#128194;</button> <!--Todos-->
+                    <button class="btn btn-lg ml-1 modal-open" data-title="Nueva venta" data-target="#newModal" @click="clearForm">&#128195;</button> <!--Nuevo-->
+                </div>
             </div>
             
-            <div class="radius shadow white p-2 mb-3">
-                <h4 class="center mb-3">Ventas recientes</h4>
+            <div class="shadow white p-2 mb-3">
+                <h5 class="p-2">Ventas recientes</h5>
                 <!-- TABLE -->
                 <table class="table">
                     <thead>
                         <tr>
                             <th>Id</th>
-                            <th>Fecha</th>
                             <th>Producto</th>
+                            <th>Cliente</th>
                             <th>Subtotal</th>
                             <th>F. Entrega</th>
-                            <th>Pago</th>
+                            <th>Pagado</th>
+                            <th>Canal</th>
                             <th>Estado</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="item in arrSales10Comp">
+                        <tr v-for="item in arrSales10Comp" onclick="show('#editModal')" @click="saleGet(item)">
                             <th>{{ item.id }}</th>
-                            <td>{{ item.dateIns }}</td>
                             <td>{{ item.productName }}</td>
+                            <td>{{ item.customer }}</td>
                             <td>{{ item.totalPrice }}</td>
                             <td>{{ item.deliveryDate }}</td>
-                            <td>{{ getAux("bool", item.payment).value }}</td>
-                            <td>{{ getAux("states", item.state).value }}</td>
-                            <td class="w-10px" 
-                                onclick="Mandarina.modalShow('#editModal')" 
-                                @click="saleGet(item)">&#128221;</td> <!--Editar-->
+                            <td :class="'text-'+getAux('bool', item.payment).color">{{ getAux("bool", item.payment).value }}</td>
+                            <td>{{ getAux("paymentChannel", item.channel).value }}</td>
+                            <td :class="'text-'+getAux('states', item.state).color">{{ getAux("states", item.state).value }}</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
-            
-            
+
+
             <%@include file="forms/search.jsp" %>
             <%@include file="forms/deliveries.jsp" %>
             <%@include file="forms/all.jsp" %>

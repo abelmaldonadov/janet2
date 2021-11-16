@@ -7,6 +7,7 @@
 var app = new Vue({
     el: "#app",
     data: {
+        spinner: '#gajo-spinner',
         user: {},
         info: {},
         
@@ -15,45 +16,45 @@ var app = new Vue({
     },
     methods: {
         inventoryGet(item){
-            Mandarina.spinnerShow()
+            show(this.spinner)
             this.clearForm()
             fetch("inventoryApi?id="+item.id, {method:"get"})
             .then(response => response.json())
             .then(json => this.inventory = json)
-            .catch(() => Mandarina.error({}))
-            .finally(() => Mandarina.spinnerHide())
+            .catch(() => sayError())
+            .finally(() => hide(this.spinner))
         },
         inventoryGetAll(){
-            Mandarina.spinnerShow()
+            show(this.spinner)
             fetch("inventoryApi?all", {method:"get"})
             .then(response => response.json())
             .then(json => this.arrInventories = json)
-            .catch(() => Mandarina.error({}))
-            .finally(() => Mandarina.spinnerHide())
+            .catch(() => sayError())
+            .finally(() => hide(this.spinner))
         },
         inventoryInsert(){
-            Mandarina.spinnerShow()
+            show(this.spinner)
             let data = new URLSearchParams()
             data.append("inventory", JSON.stringify(this.inventory))
             
             fetch("inventoryApi", {method:"post", body:data})
             .then(response => {
-                if (response.ok) Mandarina.ok({})
-                else Mandarina.error({})
+                if (response.ok) sayOk()
+                else sayError()
             })
-            .finally(() => Mandarina.spinnerHide() | this.inventoryGetAll())
+            .finally(() => hide(this.spinner) | this.inventoryGetAll())
         },
         inventoryUpdate() {
-            Mandarina.spinnerShow()
+            show(this.spinner)
             let data = new URLSearchParams()
             data.append("inventory", JSON.stringify(this.inventory))
             
             fetch("inventoryApi", {method:"put", body:data})
             .then(response => {
-                if (response.ok) Mandarina.ok({})
-                else Mandarina.error({})
+                if (response.ok) sayOk()
+                else sayError()
             })
-            .finally(() => Mandarina.spinnerHide() | this.inventoryGetAll())
+            .finally(() => hide(this.spinner) | this.inventoryGetAll())
         },
         inventoryDelete() {},
         inventorySearch() {},
@@ -70,22 +71,37 @@ var app = new Vue({
     },
     computed: {
         arrInventories10Comp() {
-            let arrReverse = this.arrInventories.reverse()
+            let arrTemp = this.arrInventories.sort((a,b)=>(a>b)?1:-1)
             let arrResolve10 = []
-            let max = 10
-            let i = 0
-            while (i < max && i < arrReverse.length) {
-                arrResolve10.push(arrReverse[i])
-                i++
-            }
+            let cant = 0
+            arrTemp.forEach(item => {
+                if (cant<10) {
+                    arrResolve10.push(item)
+                    cant++
+                }
+            })
             return arrResolve10
         },
         arrSpentsComp() {
             arrSpents = []
             for (let item of this.arrInventories) {
-                if (item.stock <= item.minStock) arrSpents.push(item)
+                if (item.stock <= item.minStock && item.state == 'A') arrSpents.push(item)
             }
             return arrSpents
+        },
+        totalStockComp() {
+            let total = 0
+            for (let inventory of this.arrInventories) {
+                if (inventory.state == 'A') total += parseInt(inventory.stock)
+            }
+            return total
+        },
+        totalOrdersComp() {
+            let total = 0
+            for (let inventory of this.arrInventories) {
+                if (inventory.state == 'P') total += parseInt(inventory.stock)
+            }
+            return total
         }
     },
     created() {
@@ -96,6 +112,6 @@ var app = new Vue({
             this.info = json.info
             this.inventoryGetAll()
         })
-        .catch(() => Mandarina.error({text:"Se perdió la comunicación con el servidor"}))
+        .catch(() => sayError({text:"Se perdió la comunicación con el servidor"}))
     }
 })

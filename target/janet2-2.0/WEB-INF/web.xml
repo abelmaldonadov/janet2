@@ -69,10 +69,6 @@
         <servlet-class>servlets.main.products.ProductsApi</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>CostsApi</servlet-name>
-        <servlet-class>servlets.main.products.CostsApi</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>InventoryApi</servlet-name>
         <servlet-class>servlets.main.inventory.InventoryApi</servlet-class>
     </servlet>
@@ -87,6 +83,10 @@
     <servlet>
         <servlet-name>VendorsApi</servlet-name>
         <servlet-class>servlets.main.vendors.VendorsApi</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SalesReport</servlet-name>
+        <servlet-class>servlets.main.sales.SalesReport</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>login</servlet-name>
@@ -141,10 +141,6 @@
         <url-pattern>/main/productsApi</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>CostsApi</servlet-name>
-        <url-pattern>/main/costsApi</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>InventoryApi</servlet-name>
         <url-pattern>/main/inventoryApi</url-pattern>
     </servlet-mapping>
@@ -159,6 +155,10 @@
     <servlet-mapping>
         <servlet-name>VendorsApi</servlet-name>
         <url-pattern>/main/vendorsApi</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SalesReport</servlet-name>
+        <url-pattern>/main/salesReport</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

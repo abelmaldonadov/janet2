@@ -14,18 +14,12 @@ import java.util.LinkedHashMap;
  */
 public class AuxBean implements Serializable {
     
-    private String tableId;
-    private String tableName;
-    private String key;
-    private String value;
-    private String abbr;
-    
-    private String userIns;
-    private String dateIns;
-    private String hostIns;
-    private String userUpd;
-    private String dateUpd;
-    private String hostUpd;
+    private String tableId = "";
+    private String tableName = "";
+    private String key = "";
+    private String value = "";
+    private String abbr = "";
+    private String color = "";
     
     public AuxBean() {
     }
@@ -36,13 +30,7 @@ public class AuxBean implements Serializable {
         this.key = String.valueOf(row.get("fie_key"));
         this.value = String.valueOf(row.get("fie_value"));
         this.abbr = String.valueOf(row.get("fie_abbr"));
-        
-        this.userIns = String.valueOf(row.get("audi_user_ins"));
-        this.dateIns = String.valueOf(row.get("audi_date_ins"));
-        this.hostIns = String.valueOf(row.get("audi_host_ins"));
-        this.userUpd = String.valueOf(row.get("audi_user_upd"));
-        this.dateUpd = String.valueOf(row.get("audi_date_upd"));
-        this.hostUpd = String.valueOf(row.get("audi_host_upd"));
+        this.color = String.valueOf(row.get("fie_color"));
     }
 
     public String getTableId() {
@@ -85,54 +73,12 @@ public class AuxBean implements Serializable {
         this.abbr = abbr;
     }
 
-    public String getUserIns() {
-        return userIns;
+    public String getColor() {
+        return color;
     }
 
-    public void setUserIns(String userIns) {
-        this.userIns = userIns;
+    public void setColor(String color) {
+        this.color = color;
     }
 
-    public String getDateIns() {
-        return dateIns;
-    }
-
-    public void setDateIns(String dateIns) {
-        this.dateIns = dateIns;
-    }
-
-    public String getHostIns() {
-        return hostIns;
-    }
-
-    public void setHostIns(String hostIns) {
-        this.hostIns = hostIns;
-    }
-
-    public String getUserUpd() {
-        return userUpd;
-    }
-
-    public void setUserUpd(String userUpd) {
-        this.userUpd = userUpd;
-    }
-
-    public String getDateUpd() {
-        return dateUpd;
-    }
-
-    public void setDateUpd(String dateUpd) {
-        this.dateUpd = dateUpd;
-    }
-
-    public String getHostUpd() {
-        return hostUpd;
-    }
-
-    public void setHostUpd(String hostUpd) {
-        this.hostUpd = hostUpd;
-    }
-    
-    
-    
 }

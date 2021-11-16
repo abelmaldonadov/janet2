@@ -4,9 +4,10 @@
  * and open the template in the editor.
  */
 
-var app = new Vue({
+let app = new Vue({
     el: "#app",
     data: {
+        spinner: '#gajo-spinner',
         user: {},
         info: {},
         
@@ -18,15 +19,15 @@ var app = new Vue({
     },
     methods: {
         saleGet(item){
-            Mandarina.spinnerShow()
+            show(this.spinner)
             fetch("salesApi?id="+item.id, {method:"get"})
             .then(response => response.json())
             .then(json => this.sale = json)
-            .catch(() => Mandarina.error({}))
-            .finally(() => Mandarina.spinnerHide())
+            .catch(() => sayError())
+            .finally(() => hide(this.spinner))
         },
         saleGetAll(){
-            Mandarina.spinnerShow()
+            show(this.spinner)
             fetch("salesApi?all", {method:"get"})
             .then(response => response.json())
             .then(json => {
@@ -34,32 +35,32 @@ var app = new Vue({
                 this.arrInventories = json.arrInventories
                 this.arrVendors = json.arrVendors
             })
-            .catch(() => Mandarina.error({}))
-            .finally(() => Mandarina.spinnerHide())
+            .catch(() => sayError())
+            .finally(() => hide(this.spinner))
         },
         saleInsert(){
-            Mandarina.spinnerShow()
+            show(this.spinner)
             let data = new URLSearchParams()
             data.append("sale", JSON.stringify(this.sale))
             
             fetch("salesApi", {method:"post", body:data})
             .then(response => {
-                if (response.ok) Mandarina.ok({})
-                else Mandarina.error({})
+                if (response.ok) sayOk()
+                else sayError()
             })
-            .finally(() => Mandarina.spinnerHide() | this.saleGetAll())
+            .finally(() => hide(this.spinner) | this.saleGetAll())
         },
         saleUpdate() {
-            Mandarina.spinnerShow()
+            show(this.spinner)
             let data = new URLSearchParams()
             data.append("sale", JSON.stringify(this.sale))
             
             fetch("salesApi", {method:"put", body:data})
             .then(response => {
-                if (response.ok) Mandarina.ok({})
-                else Mandarina.error({})
+                if (response.ok) sayOk()
+                else sayError()
             })
-            .finally(() => Mandarina.spinnerHide() | this.saleGetAll())
+            .finally(() => hide(this.spinner) | this.saleGetAll())
         },
         saleDelete() {},
         saleSearch() {},
@@ -76,22 +77,48 @@ var app = new Vue({
     },
     computed: {
         arrSales10Comp() {
-            let arrReverse = this.arrSales.reverse()
+            let arrTemp = this.arrSales.sort((a,b)=>(a>b)?1:-1)
             let arrResolve10 = []
-            let max = 10
-            let i = 0
-            while (i < max && i < arrReverse.length) {
-                arrResolve10.push(arrReverse[i])
-                i++
-            }
+            let cant = 0
+            arrTemp.forEach(item => {
+                if (cant<10) {
+                    arrResolve10.push(item)
+                    cant++
+                }
+            })
             return arrResolve10
         },
         arrDeliveriesComp() {
-            arrDeliveries = []
+            let arrDeliveries = []
             for (let item of this.arrSales) {
                 if (item.state == "P") arrDeliveries.push(item)
             }
             return arrDeliveries
+        },
+        totalSalesComp() {
+            let totalSales = 0
+            for (let sale of this.arrSales) {
+                totalSales += parseFloat(sale.totalPrice)
+            }
+            return totalSales.toFixed(2)
+        },
+        totalSalesCashComp() {
+            let totalSales = 0
+            for (let sale of this.arrSales) {
+                if (sale.channel == '1' && sale.state == 'A') {
+                    totalSales += parseFloat(sale.totalPrice)
+                }
+            }
+            return totalSales.toFixed(2)
+        },
+        totalSalesBanksComp() {
+            let totalSales = 0
+            for (let sale of this.arrSales) {
+                if (sale.channel != '1' && sale.state == 'A') {
+                    totalSales += parseFloat(sale.totalPrice)
+                }
+            }
+            return totalSales.toFixed(2)
         }
     },
     created() {
@@ -102,6 +129,6 @@ var app = new Vue({
             this.info = json.info
             this.saleGetAll()
         })
-        .catch(() => Mandarina.error({text:"Se perdió la comunicación con el servidor"}))
+        .catch(() => sayError({text:"Se perdió la comunicación con el servidor"}))
     }
 })

@@ -88,6 +88,8 @@ public class InventoryApi extends HttpServlet {
             Driver dao = DaoFactory.createDao();
             ArrayList data = new ArrayList();
             data.add(inventory.getId());
+            data.add(inventory.getListPrice());
+            data.add(inventory.getUpc());
             data.add(inventory.getNotes());
             data.add(inventory.getState());
             data.add(request.getSession().getAttribute("user"));

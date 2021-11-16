@@ -13,18 +13,18 @@
         <%@include file="../templates/styles.jsp" %>
         
     </head>
-    <body>
+    <body data-texture="plus">
         
         <main class="container" id="app">
             
-            <div class="row flex-center pt-9">
-                <div class="col sm-6 md-5 lg-4 xl-3">
-                    <h3 class="center mb-3">Login</h3>
+            <div class="row flex-center pt-10">
+                <div class="col sm-8 md-6 xl-3">
+                    <h4 class="center mb-3">Janet 2.0</h4>
                     <input type="text" placeholder="Ingresa tu usuario" v-model="user">
                     <input type="password" placeholder="Ingresa tu contraseña" v-model="password" @keypress.enter="login">
-                    <a href="#" class="link text-orange ml-1">Recuperar contraseña</a>
+                    <a href="#" class="link text-blue ml-1">Recuperar contraseña</a>
                     <div class="flex-right">
-                        <button class="btn l-orange" @click="login">Ingresar</button>
+                        <button class="btn orange" @click="login">Ingresar</button>
                     </div>
                 </div>
             </div>

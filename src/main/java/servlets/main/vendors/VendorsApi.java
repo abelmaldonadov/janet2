@@ -88,7 +88,6 @@ public class VendorsApi extends HttpServlet {
             Driver dao = DaoFactory.createDao();
             ArrayList data = new ArrayList();
             data.add(vendor.getName());
-            data.add(vendor.getChannel());
             data.add(vendor.getPhone());
             data.add(vendor.getEmail());
             data.add(vendor.getAddr());
@@ -120,7 +119,6 @@ public class VendorsApi extends HttpServlet {
             ArrayList data = new ArrayList();
             data.add(vendor.getId());
             data.add(vendor.getName());
-            data.add(vendor.getChannel());
             data.add(vendor.getPhone());
             data.add(vendor.getEmail());
             data.add(vendor.getAddr());

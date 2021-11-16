@@ -6,9 +6,9 @@
 
 <!-- MODAL -->
 <div class="modal" id="allModal">
-    <div class="content white">
+    <div class="modal-content white">
         <div class="modal-header">
-            <h4>Todos los productos</h4>
+            <h5>Todos los productos</h5>
         </div>
         <div class="modal-body">
 
@@ -23,6 +23,7 @@
                         <th>Modelo</th>
                         <th>Etiqueta</th>
                         <th>Estado</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -32,11 +33,8 @@
                         <td>{{ item.name }}</td>
                         <td>{{ item.brand }}</td>
                         <td>{{ item.model }}</td>
-                        <td>{{ getAux("tags", item.tag).value }}</td>
-                        <td>{{ getAux("states", item.state).value }}</td>
-                        <td class="w-10px" 
-                            onclick="Mandarina.modalShow('#costsModal')" 
-                            @click="productGet(item)">&#128176;</td> <!--Costos-->
+                        <td class="text-purple">{{ getAux("tags", item.tag).value }}</td>
+                        <td :class="'text-'+getAux('states', item.state).color">{{ getAux("states", item.state).value }}</td>
                         <td class="w-10px" 
                             onclick="Mandarina.modalShow('#editModal')" 
                             @click="productGet(item)">&#128221;</td> <!--Editar-->
@@ -46,7 +44,7 @@
 
         </div>
         <div class="modal-footer">
-            <button class="btn l-notify modal-close">Cerrar</button>
+            <button class="btn notify modal-close">Cerrar</button>
         </div>
     </div>
 </div>

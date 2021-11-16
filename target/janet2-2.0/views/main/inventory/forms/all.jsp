@@ -6,9 +6,9 @@
 
 <!-- MODAL -->
 <div class="modal" id="allModal">
-    <div class="content white">
+    <div class="modal-content white">
         <div class="modal-header">
-            <h4>Todos los proveedores</h4>
+            <h5>Todos los proveedores</h5>
         </div>
         <div class="modal-body">
 
@@ -18,6 +18,7 @@
                     <tr>
                         <th>#</th>
                         <th>Tienda</th>
+                        <th>UPC</th>
                         <th>Producto</th>
                         <th>P. Lista</th>
                         <th>Id Compra</th>
@@ -27,25 +28,23 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="item in arrInventories10Comp">
+                    <tr v-for="item in arrInventories" onclick="show('#editModal')" @click="inventoryGet(item)">
                         <th>{{ item.id }}</th>
                         <td>{{ item.storeName }}</td>
+                        <th>{{ item.upc }}</th>
                         <td>{{ item.productName }}</td>
-                        <td>{{ item.listPrice }}</td>
+                        <td class="text-purple">{{ item.listPrice }}</td>
                         <td>{{ item.purchaseId }}</td>
                         <td>{{ item.initialStock }}</td>
                         <td>{{ item.stock }}</td>
-                        <td>{{ getAux("states", item.state).value }}</td>
-                        <td class="w-10px" 
-                            onclick="Mandarina.modalShow('#editModal')" 
-                            @click="inventoryGet(item)">&#128230;</td> <!--Editar-->
+                        <td :class="'text-'+getAux('states', item.state).color">{{ getAux("states", item.state).value }}</td>
                     </tr>
                 </tbody>
             </table>
 
         </div>
         <div class="modal-footer">
-            <button class="btn l-notify modal-close">Cerrar</button>
+            <button class="btn notify modal-close">Cerrar</button>
         </div>
     </div>
 </div>
